@@ -1,6 +1,9 @@
 MANAS Scrum Project
 
-Team Members
+Team Members:
+
  Merve Dadaş
+ 
  Büşra Karausta
+ 
  Elif Solmaz
