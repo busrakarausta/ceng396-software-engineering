@@ -10,15 +10,23 @@ const sources = [
   {
     pp: ppSrc2,
     txt: "Büşra Karausta deleted Management task of Github Project."
+  },
+  { pp: ppSrc, txt: "Ekrem Güven added a new task to Idea State." },
+  { pp: bgSrc, txt: "You added a new task to Xamarin Basics." },
+  { pp: ppSrc, txt: "Ekrem Güven added a new task to Idea State." },
+  {
+    pp: ppSrc2,
+    txt: "Büşra Karausta deleted Management task of Github Project."
   }
 ];
 export default class DiscoverScreen extends Component {
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={sources}
           renderItem={({ item }) => <NotifCard src={item.pp} text={item.txt} />}
+          showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
