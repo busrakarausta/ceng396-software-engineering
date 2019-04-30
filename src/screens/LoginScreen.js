@@ -5,6 +5,7 @@ import LoginForm from "../components/LoginForm";
 import Wallpaper from "../components/Wallpaper";
 import ButtonSubmit from "../components/ButtonSubmit";
 import SignupSection from "../components/SignupSection";
+import Header from "../components/Header";
 
 export default class LoginScreen extends Component {
   render() {
