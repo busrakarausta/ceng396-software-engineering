@@ -27,7 +27,14 @@ export default class Header extends Component {
           <Ionicons name="ios-menu" size={32} color="black" />
           <Image
             source={bgSrc}
-            style={{ width: 40, height: 40, borderRadius: 20 }}
+            style={{
+              width: 40,
+              height: 40,
+              padding: 5,
+              borderWidth: 3,
+              borderColor: "rgba(243,191,144,1)",
+              borderRadius: 20
+            }}
           />
         </View>
         <Text
