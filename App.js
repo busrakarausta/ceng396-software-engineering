@@ -14,6 +14,7 @@ import DoneScreen from "./src/screens/DoneScreen";
 import DoingScreen from "./src/screens/DoingScreen";
 import BottomBar from "./src/components/BottomBar/BottomBar";
 
+
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
@@ -48,7 +49,7 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
-        <AppContainer />
+        <DoingScreen />
       </View>
     );
   }
