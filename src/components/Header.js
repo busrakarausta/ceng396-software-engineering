@@ -22,13 +22,14 @@ export default class Header extends Component {
             android: { elevation: 1 }
           }),
           width: "100%",
-          height: "25%",
+          height: "15%",
           justifyContent: "space-between"
         }}
       >
         <View
           style={{
-            padding: 15,
+            marginTop: 20,
+            padding: 5,
             flexDirection: "row",
             justifyContent: "space-between"
           }}
@@ -39,7 +40,7 @@ export default class Header extends Component {
             style={{
               width: 40,
               height: 40,
-              padding: 5,
+              padding: 15,
               borderWidth: 3,
               borderColor: "rgba(243,191,144,1)",
               borderRadius: 20
@@ -53,9 +54,7 @@ export default class Header extends Component {
             marginTop: 0,
             fontSize: 40
           }}
-        >
-          Discover
-        </Text>
+        />
       </View>
     );
   }

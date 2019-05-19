@@ -13,13 +13,17 @@ import Header from "./src/components/Header";
 import DoneScreen from "./src/screens/DoneScreen";
 import DoingScreen from "./src/screens/DoingScreen";
 import BottomBar from "./src/components/BottomBar/BottomBar";
-
-
+import ToDoScreen from "./src/screens/ToDoScreen";
+import InProgressScreen from "./src/screens/InProgressScreen";
+import CompletedScreen from "./src/screens/CompletedScreen";
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
     Done: DoneScreen,
-    Doing: DoingScreen
+    Doing: DoingScreen,
+    ToDo: ToDoScreen,
+    InProgress: InProgressScreen,
+    Completed: CompletedScreen
   },
   {
     tabBarComponent: props => <BottomBar {...props} />
@@ -48,8 +52,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Header />
         <StatusBar hidden={true} />
-        <DoingScreen />
+        <CompletedScreen />
       </View>
     );
   }
