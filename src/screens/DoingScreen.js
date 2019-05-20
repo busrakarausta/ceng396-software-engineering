@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import CalendarHeatmap from "react-native-calendar-heatmap";
-import { View, Text, Platform } from "react-native";
+import { View, Text } from "react-native";
+import Card from "../components/Card";
+import Timestamp from "react-timestamp";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default class DoingScreen extends Component {
   constructor() {
@@ -8,15 +10,82 @@ export default class DoingScreen extends Component {
   }
   render() {
     return (
-      <CalendarHeatmap
-        endDate={new Date("2016-02-01")}
-        numDays={50}
-        values={[
-          { date: "2016-01-01" },
-          { date: "2016-01-22" },
-          { date: "2016-01-28" }
-        ]}
-      />
+      <View>
+        <Text style={styles.text}>Doing</Text>
+        <ScrollView>
+          <Card
+            // onPress={() => }
+            title={"Task Design"}
+            // subtitle=""
+            status={"Begginer"}
+          >
+            <Timestamp
+              style={{ color: "gray" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
+
+          <Card
+            // onPress={() => }
+            title={"Product Updates"}
+            // subtitle=""
+            status={"Well"}
+          >
+            <Timestamp
+              style={{ color: "green" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
+
+          <Card
+            // onPress={() => }
+            title={"Time Implementation"}
+            // subtitle=""
+            status={"Bad"}
+          >
+            <Timestamp
+              style={{ color: "red" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
+
+          <Card
+            // onPress={() => }
+            title={"Game"}
+            // subtitle=""
+            status={"Well"}
+          >
+            <Timestamp
+              style={{ color: "green" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
+        </ScrollView>
+      </View>
     );
   }
 }
+
+const styles = {
+  text: {
+    fontFamily: "sans-serif",
+    fontSize: 25,
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 20
+  }
+};

@@ -34,7 +34,8 @@ export default class Header extends Component {
       >
         <View
           style={{
-            padding: 15,
+            marginTop: 20,
+            padding: 5,
             flexDirection: "row",
             justifyContent: "space-between"
           }}
@@ -45,7 +46,7 @@ export default class Header extends Component {
             style={{
               width: 40,
               height: 40,
-              padding: 5,
+              padding: 15,
               borderWidth: 3,
               borderColor: "rgba(243,191,144,1)",
               borderRadius: 20

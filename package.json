@@ -12,13 +12,19 @@
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+<<<<<<< HEAD
     "react-native-calendar-heatmap": "^0.1.2",
     "react-native-dynamic-search-bar": "^0.1.11",
     "react-native-iphone-x-helper": "^1.2.0",
+=======
+    "react-native-elements": "^1.1.0",
+    "react-native-svg-animated-linear-gradient": "^0.1.9",
+>>>>>>> e34a5e2a3b62842bd72b95f7e2ec3f9279aef55f
     "react-native-typography": "^1.4.0",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.9.1",
     "react-redux": "^7.0.3",
+    "react-timestamp": "^5.0.0",
     "redux": "^4.0.1",
     "redux-axios-middleware": "^4.0.0"
   },
