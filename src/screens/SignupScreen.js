@@ -7,6 +7,9 @@ import ButtonSubmit from "../components/ButtonSubmit";
 import SignupSection from "../components/SignupSection";
 
 export default class SignupScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
       <Wallpaper>

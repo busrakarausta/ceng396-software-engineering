@@ -17,11 +17,11 @@ import BottomBar from "./src/components/BottomBar/BottomBar";
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
-    Done: DoneScreen,
-    Doing: DoingScreen
+    Doing: DoingScreen,
+    Done: DoneScreen
   },
   {
-    tabBarComponent: props => <BottomBar {...props} />
+    tabBarComponent: (navigation, props) => <BottomBar {...props} />
   }
 );
 const HomeNavigator = createStackNavigator(
@@ -31,15 +31,16 @@ const HomeNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      header: <Header />
+      title: "  ",
+      header: (navigation, props) => <Header {...props} {...navigation} />
     }
   }
 );
 
 const WelcomeNavigator = createStackNavigator({
   Home: HomeNavigator,
-  Login: LoginScreen,
-  Signup: SignupScreen
+  Signup: SignupScreen,
+  Login: LoginScreen
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);

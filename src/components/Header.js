@@ -6,6 +6,12 @@ import { systemWeights } from "react-native-typography";
 import bgSrc from "../images/pp.jpg";
 
 export default class Header extends Component {
+  constructor() {
+    super();
+  }
+  componentDidMount() {
+    console.log(this.props.scene.descriptor.options);
+  }
   render() {
     return (
       <View
@@ -22,7 +28,7 @@ export default class Header extends Component {
             android: { elevation: 1 }
           }),
           width: "100%",
-          height: "25%",
+          height: "22%",
           justifyContent: "space-between"
         }}
       >
@@ -54,7 +60,7 @@ export default class Header extends Component {
             fontSize: 40
           }}
         >
-          Discover
+          {this.props.scene.descriptor.options.title}
         </Text>
       </View>
     );
