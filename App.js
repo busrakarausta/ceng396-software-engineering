@@ -19,16 +19,11 @@ import CompletedScreen from "./src/screens/CompletedScreen";
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
-<<<<<<< HEAD
-    Doing: DoingScreen,
-    Done: DoneScreen
-=======
     Done: DoneScreen,
     Doing: DoingScreen,
     ToDo: ToDoScreen,
     InProgress: InProgressScreen,
     Completed: CompletedScreen
->>>>>>> e34a5e2a3b62842bd72b95f7e2ec3f9279aef55f
   },
   {
     tabBarComponent: (navigation, props) => <BottomBar {...props} />
