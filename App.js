@@ -18,6 +18,7 @@ import InProgressScreen from "./src/screens/InProgressScreen";
 import CompletedScreen from "./src/screens/CompletedScreen";
 import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
+import TaskScreens from "./src/screens/TaskScreens";
 const TabNavigation = createBottomTabNavigator(
   {
     CreateProject: CreateProject,
@@ -51,7 +52,7 @@ const WelcomeNavigator = createStackNavigator({
   Signup: SignupScreen
 });
 
-const AppContainer = createAppContainer(HomeNavigator);
+const AppContainer = createAppContainer(WelcomeNavigator);
 export default class App extends React.Component {
   render() {
     return (
