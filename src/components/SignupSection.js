@@ -6,7 +6,9 @@ export default class SignupSection extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{this.props.TextFirst}</Text>
+        <Text style={styles.text} onPress={this.props.onPress}>
+          {this.props.TextFirst}
+        </Text>
         <Text style={styles.text}>{this.props.TextSecond}</Text>
       </View>
     );

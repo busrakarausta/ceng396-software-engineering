@@ -12,7 +12,9 @@ export default class SignupForm extends Component {
     super(props);
     this.state = {
       showPass: true,
-      press: false
+      password: "",
+      press: false,
+      confirm: ""
     };
     this.showPass = this.showPass.bind(this);
   }
@@ -29,6 +31,7 @@ export default class SignupForm extends Component {
         <UserInput
           source={usernameImg}
           placeholder="Username"
+          onChangeText={username => this.props.handler_username(username)}
           autoCapitalize={"none"}
           returnKeyType={"done"}
           autoCorrect={false}
@@ -37,6 +40,7 @@ export default class SignupForm extends Component {
           source={usernameImg}
           placeholder="Email"
           autoCapitalize={"none"}
+          onChangeText={email => this.props.handler_email(email)}
           returnKeyType={"done"}
           autoCorrect={false}
         />
@@ -45,6 +49,7 @@ export default class SignupForm extends Component {
           secureTextEntry={this.state.showPass}
           placeholder="Password"
           returnKeyType={"done"}
+          onChangeText={password => this.props.handler_pass(password)}
           autoCapitalize={"none"}
           autoCorrect={false}
         />
@@ -52,6 +57,7 @@ export default class SignupForm extends Component {
           source={passwordImg}
           secureTextEntry={this.state.showPass}
           placeholder="Confirm Password"
+          onChangeText={confirm => this.props.handler_confirmpass(confirm)}
           returnKeyType={"done"}
           autoCapitalize={"none"}
           autoCorrect={false}

@@ -13,6 +13,7 @@ import {
   Alert,
   View
 } from "react-native";
+import { SecureStore } from "expo";
 
 import spinner from "../images/loading.gif";
 
@@ -33,20 +34,39 @@ export default class ButtonSubmit extends Component {
     this._onPress = this._onPress.bind(this);
   }
 
-  _action() {
-    const { email, password } = this.props;
+  _actionSignup() {
+    const { email, password, username } = this.props;
 
     axios
       .post(
-        "http://192.168.1.34:3000/auth/",
+        "http://192.168.1.34:3000/user/",
 
         {
-          email: email,
-          password: password
+          username: username,
+          password: password,
+          email: email
         }
       )
       .then(response => {
-        console.log(response.data);
+        console.log(response);
+        SecureStore.setItemAsync("secure_token", response.data.token);
+      })
+      .catch(error => {
+        console.error("registerAction:", error);
+      });
+    console.log(username);
+  }
+
+  _actionLogin() {
+    const { email, password } = this.props;
+
+    axios
+      .post("http://192.168.1.34:3000/auth/", {
+        email: email,
+        password: password
+      })
+      .then(response => {
+        console.log(response);
       })
       .catch(error => {
         console.error("loginAction:", error);
@@ -70,7 +90,9 @@ export default class ButtonSubmit extends Component {
     }, 4000);
   }
   _navigateTo = () => {
-    this._action();
+    console.log(this.props.username);
+    if (!this.props.username) this._actionLogin();
+    if (this.props.username) this._actionSignup();
     this.props.onPress();
   };
 

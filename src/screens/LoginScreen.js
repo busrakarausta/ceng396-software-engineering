@@ -46,6 +46,7 @@ export default class LoginScreen extends Component {
           onPress={() => this.props.navigation.navigate("Home")}
         />
         <SignupSection
+          onPress={() => this.props.navigation.navigate("Signup")}
           TextFirst="Create Account"
           TextSecond="Forget Password?"
         />

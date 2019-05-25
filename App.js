@@ -22,10 +22,11 @@ import { MenuProvider } from "react-native-popup-menu";
 
 const TabNavigation = createBottomTabNavigator(
   {
+    CreateTask: CreateTask,
+    CreateProject: CreateProject,
     Completed: CompletedScreen,
     ToDo: ToDoScreen,
     InProgress: InProgressScreen,
-    CreateProject: CreateProject,
     Discover: DiscoverScreen,
     Done: DoneScreen,
     Doing: DoingScreen
@@ -48,9 +49,10 @@ const HomeNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
-  Home: HomeNavigator,
+  Signup: SignupScreen,
   Login: LoginScreen,
-  Signup: SignupScreen
+
+  Home: HomeNavigator
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);
@@ -59,13 +61,9 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
-<<<<<<< HEAD
         <MenuProvider>
           <AppContainer />
         </MenuProvider>
-=======
-        <AppContainer  />
->>>>>>> 7780306e17668ae985e007e56b28ceb21f05f045
       </View>
     );
   }
