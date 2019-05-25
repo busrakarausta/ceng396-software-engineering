@@ -15,7 +15,10 @@ export default class SignupScreen extends Component {
       <Wallpaper>
         <Logo />
         <SignupForm />
-        <ButtonSubmit Text="SIGN UP" />
+        <ButtonSubmit
+          Text="SIGN UP"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
         <SignupSection TextFirst="Already have an acount?" />
       </Wallpaper>
     );

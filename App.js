@@ -16,6 +16,7 @@ import BottomBar from "./src/components/BottomBar/BottomBar";
 import ToDoScreen from "./src/screens/ToDoScreen";
 import InProgressScreen from "./src/screens/InProgressScreen";
 import CompletedScreen from "./src/screens/CompletedScreen";
+
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
@@ -43,9 +44,9 @@ const HomeNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
+  Login: LoginScreen,
   Home: HomeNavigator,
-  Signup: SignupScreen,
-  Login: LoginScreen
+  Signup: SignupScreen
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);
@@ -53,9 +54,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header />
         <StatusBar hidden={true} />
-        <CompletedScreen />
+        <AppContainer />
       </View>
     );
   }

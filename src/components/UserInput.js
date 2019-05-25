@@ -12,6 +12,7 @@ export default class UserInput extends Component {
           style={styles.input}
           placeholder={this.props.placeholder}
           secureTextEntry={this.props.secureTextEntry}
+          onChangeText={this.props.onChangeText}
           autoCorrect={this.props.autoCorrect}
           autoCapitalize={this.props.autoCapitalize}
           returnKeyType={this.props.returnKeyType}
@@ -28,6 +29,7 @@ UserInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   secureTextEntry: PropTypes.bool,
   autoCorrect: PropTypes.bool,
+  onChangeText: PropTypes.func,
   autoCapitalize: PropTypes.string,
   returnKeyType: PropTypes.string
 };

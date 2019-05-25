@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import Dimensions from "Dimensions";
 import {
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   Animated,
+  AsyncStorage,
   Easing,
   Image,
   Alert,
@@ -31,6 +33,27 @@ export default class ButtonSubmit extends Component {
     this._onPress = this._onPress.bind(this);
   }
 
+  _action() {
+    const { email, password } = this.props;
+
+    axios
+      .post(
+        "http://192.168.1.34:3000/auth/",
+
+        {
+          email: email,
+          password: password
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error("loginAction:", error);
+      });
+    console.log(email);
+  }
+
   _onPress() {
     if (this.state.isLoading) return;
 
@@ -43,8 +66,13 @@ export default class ButtonSubmit extends Component {
 
     setTimeout(() => {
       this._onGrow();
+      this._navigateTo();
     }, 4000);
   }
+  _navigateTo = () => {
+    this._action();
+    this.props.onPress();
+  };
 
   _onGrow() {
     Animated.timing(this.growAnimated, {
