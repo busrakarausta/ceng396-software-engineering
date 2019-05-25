@@ -56,7 +56,7 @@ export default class TaskCard extends Component {
               </Body>
             </Right>
           </CardItem>
-          <CardItem cardBody style={{ width: "90%", height: "15%" }}>
+          <CardItem cardBody style={{ width: "90%", height: "18%" }}>
             <Text note numberOfLines={2}>
               {this.props.desc}
             </Text>
