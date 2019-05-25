@@ -11,7 +11,9 @@ export default class LoginForm extends Component {
     super(props);
     this.state = {
       showPass: true,
-      press: false
+      press: false,
+      email: "",
+      password: ""
     };
     this.showPass = this.showPass.bind(this);
   }
@@ -27,9 +29,10 @@ export default class LoginForm extends Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <UserInput
           source={usernameImg}
-          placeholder="Username"
+          placeholder="Email"
           autoCapitalize={"none"}
           returnKeyType={"done"}
+          onChangeText={email => this.props.handler_email(email)}
           autoCorrect={false}
         />
         <UserInput
@@ -38,6 +41,7 @@ export default class LoginForm extends Component {
           placeholder="Password"
           returnKeyType={"done"}
           autoCapitalize={"none"}
+          onChangeText={password => this.props.handler_pass(password)}
           autoCorrect={false}
         />
       </KeyboardAvoidingView>

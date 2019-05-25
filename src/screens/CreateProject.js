@@ -97,9 +97,8 @@ export default class CreateProject extends Component {
   }
 }
 
-
 /*
-//date picker current selected date.
+date picker current selected date.
  <Text style={{ textAlign: "center"}}>
               Project Due Date: {this.state.chosenDate.toString().substr(4, 12)}
             </Text>

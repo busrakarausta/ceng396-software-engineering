@@ -29,7 +29,7 @@ const TabNavigation = createBottomTabNavigator(
     Completed: CompletedScreen
   },
   {
-    tabBarComponent: props => <BottomBar {...props} />
+    tabBarComponent: (navigation, props) => <BottomBar {...props} />
   }
 );
 const HomeNavigator = createStackNavigator(
@@ -39,14 +39,15 @@ const HomeNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      header: <Header />
+      title: "  ",
+      header: (navigation, props) => <Header {...props} {...navigation} />
     }
   }
 );
 
 const WelcomeNavigator = createStackNavigator({
-  Home: HomeNavigator,
   Login: LoginScreen,
+  Home: HomeNavigator,
   Signup: SignupScreen
 });
 
@@ -55,9 +56,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header />
         <StatusBar hidden={true} />
-        <HomeNavigator />
+        <AppContainer />
       </View>
     );
   }

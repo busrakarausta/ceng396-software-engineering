@@ -7,12 +7,18 @@ import ButtonSubmit from "../components/ButtonSubmit";
 import SignupSection from "../components/SignupSection";
 
 export default class SignupScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
       <Wallpaper>
         <Logo />
         <SignupForm />
-        <ButtonSubmit Text="SIGN UP" />
+        <ButtonSubmit
+          Text="SIGN UP"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
         <SignupSection TextFirst="Already have an acount?" />
       </Wallpaper>
     );

@@ -20,6 +20,10 @@ const sources = [
   }
 ];
 export default class DiscoverScreen extends Component {
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
