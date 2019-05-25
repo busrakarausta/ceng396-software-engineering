@@ -3,7 +3,7 @@ import { Container, Header, Tab, Tabs, ScrollableTab } from "native-base";
 import ToDoScreen from "./ToDoScreen";
 import InProgressScreen from "./InProgressScreen";
 import CompletedScreen from "./CompletedScreen";
-export default class TabsScrollableExample extends Component {
+export default class TaskScreens extends Component {
   render() {
     return (
       <Container style={{ backgroundColor: "orange" }}>
