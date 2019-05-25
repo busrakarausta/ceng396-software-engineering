@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "name": "manas",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -19,7 +20,7 @@
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.9.1",
     "react-redux": "^7.0.3",
-    "react-timestamp": "^5.0.0",
+    "react-timestamp": "^5.1.0",
     "redux": "^4.0.1",
     "redux-axios-middleware": "^4.0.0"
   },

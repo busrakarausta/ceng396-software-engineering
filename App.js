@@ -20,7 +20,7 @@ import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
 const TabNavigation = createBottomTabNavigator(
   {
-    CreateProject:CreateProject,
+    CreateProject: CreateProject,
     Discover: DiscoverScreen,
     Done: DoneScreen,
     Doing: DoingScreen,
@@ -51,7 +51,7 @@ const WelcomeNavigator = createStackNavigator({
   Signup: SignupScreen
 });
 
-const AppContainer = createAppContainer(WelcomeNavigator);
+const AppContainer = createAppContainer(HomeNavigator);
 export default class App extends React.Component {
   render() {
     return (
