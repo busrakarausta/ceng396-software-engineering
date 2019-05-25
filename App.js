@@ -57,7 +57,7 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
-        <AppContainer />
+        <CreateProject />
       </View>
     );
   }
