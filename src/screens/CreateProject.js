@@ -98,7 +98,7 @@ export default class CreateProject extends Component {
 
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Enter your link: </Text>
+                <Text style={{ color: "#333333" }}>Links: </Text>
               </CardItem>
               <CardItem>
                 <Body>
