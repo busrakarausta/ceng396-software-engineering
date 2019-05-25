@@ -16,8 +16,11 @@ import BottomBar from "./src/components/BottomBar/BottomBar";
 import ToDoScreen from "./src/screens/ToDoScreen";
 import InProgressScreen from "./src/screens/InProgressScreen";
 import CompletedScreen from "./src/screens/CompletedScreen";
+import CreateTask from "./src/screens/CreateTask";
+import CreateProject from "./src/screens/CreateProject";
 const TabNavigation = createBottomTabNavigator(
   {
+    CreateProject:CreateProject,
     Discover: DiscoverScreen,
     Done: DoneScreen,
     Doing: DoingScreen,
@@ -54,7 +57,7 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <Header />
         <StatusBar hidden={true} />
-        <CompletedScreen />
+        <HomeNavigator />
       </View>
     );
   }
