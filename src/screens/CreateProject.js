@@ -64,7 +64,9 @@ export default class CreateProject extends Component {
 
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Project Description </Text>
+                  <ScrollView>
+                    <Text style={{ color: "#333333" }}>Project Description </Text>
+                 </ScrollView>
               </CardItem>
               <CardItem>
                 <Body>
@@ -93,6 +95,25 @@ export default class CreateProject extends Component {
                 disabled={false}
               />
             </Card>
+
+            <Card style={{ borderWidth: 2 }}>
+              <CardItem header bordered>
+                <Text style={{ color: "#333333" }}>Links: </Text>
+              </CardItem>
+              <CardItem>
+                <Body>
+                  <Item floatingLabel>
+                    <Input />
+                  </Item>
+                </Body>
+              </CardItem>
+            </Card>
+
+
+            
+
+
+
 
             <Button
               style={{ backgroundColor: "orange", marginTop: 10 }}

@@ -59,9 +59,13 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
+<<<<<<< HEAD
         <MenuProvider>
           <AppContainer />
         </MenuProvider>
+=======
+        <AppContainer  />
+>>>>>>> 7780306e17668ae985e007e56b28ceb21f05f045
       </View>
     );
   }
