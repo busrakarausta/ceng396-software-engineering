@@ -18,15 +18,17 @@ import InProgressScreen from "./src/screens/InProgressScreen";
 import CompletedScreen from "./src/screens/CompletedScreen";
 import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
+import { MenuProvider } from "react-native-popup-menu";
+
 const TabNavigation = createBottomTabNavigator(
   {
+    Completed: CompletedScreen,
+    ToDo: ToDoScreen,
+    InProgress: InProgressScreen,
     CreateProject: CreateProject,
     Discover: DiscoverScreen,
     Done: DoneScreen,
-    Doing: DoingScreen,
-    ToDo: ToDoScreen,
-    InProgress: InProgressScreen,
-    Completed: CompletedScreen
+    Doing: DoingScreen
   },
   {
     tabBarComponent: (navigation, props) => <BottomBar {...props} />
@@ -46,18 +48,20 @@ const HomeNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
-  Login: LoginScreen,
   Home: HomeNavigator,
+  Login: LoginScreen,
   Signup: SignupScreen
 });
 
-const AppContainer = createAppContainer(HomeNavigator);
+const AppContainer = createAppContainer(WelcomeNavigator);
 export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
-        <AppContainer />
+        <MenuProvider>
+          <AppContainer />
+        </MenuProvider>
       </View>
     );
   }
