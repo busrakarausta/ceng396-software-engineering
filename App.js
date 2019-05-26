@@ -15,19 +15,20 @@ import DoingScreen from "./src/screens/DoingScreen";
 import BottomBar from "./src/components/BottomBar/BottomBar";
 import ToDoScreen from "./src/screens/ToDoScreen";
 import InProgressScreen from "./src/screens/InProgressScreen";
-import CompletedScreen from "./src/screens/CompletedScreen";
+import TaskScreen from "./src/screens/TaskScreen";
 import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
-import TaskScreens from "./src/screens/TaskScreens";
-import { MenuProvider } from "react-native-popup-menu";
+import CompletedScreen from "./src/screens/CompletedScreen";
+import { MenuProvider, Menu } from "react-native-popup-menu";
 
 const TabNavigation = createBottomTabNavigator(
   {
+    Discover: DiscoverScreen,
+    CreateTask: CreateTask,
+    CreateProject: CreateProject,
     Completed: CompletedScreen,
     ToDo: ToDoScreen,
     InProgress: InProgressScreen,
-    CreateProject: CreateProject,
-    Discover: DiscoverScreen,
     Done: DoneScreen,
     Doing: DoingScreen
   },
@@ -42,16 +43,17 @@ const HomeNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      title: "  ",
+      title: "Discover  ",
       header: (navigation, props) => <Header {...props} {...navigation} />
     }
   }
 );
 
 const WelcomeNavigator = createStackNavigator({
+  TaskScreen: TaskScreen,
   Home: HomeNavigator,
-  Login: LoginScreen,
-  Signup: SignupScreen
+  Signup: SignupScreen,
+  Login: LoginScreen
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);
@@ -60,17 +62,9 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
-<<<<<<< HEAD
-        <AppContainer />
-=======
-<<<<<<< HEAD
         <MenuProvider>
           <AppContainer />
         </MenuProvider>
-=======
-        <AppContainer  />
->>>>>>> 7780306e17668ae985e007e56b28ceb21f05f045
->>>>>>> 3bd5f6b626f050b9f2693910059ebe697b6ff3bc
       </View>
     );
   }
