@@ -1,22 +1,20 @@
 import React, { Component } from "react";
-import { Dimensions, FlatList, ScrollView } from "react-native";
+import { Dimensions, ScrollView,View } from "react-native";
+
 import {
   Button,
   Container,
   Content,
   Header,
-  Form,
   Item,
-  Label,
   Input,
-  InputGroup,
   Left,
-  Right,
   Card,
   CardItem,
   Body,
   Text,
-  DatePicker
+  DatePicker,
+  Icon
 } from "native-base";
 import { Font, AppLoading } from "expo";
 
@@ -25,11 +23,19 @@ export default class CreateProject extends Component {
     super(props);
     this.state = { chosenDate: new Date(), loading: true };
     this.setDate = this.setDate.bind(this);
+    this.state = {
+      pname: "",
+      description: "",
+      links:""
+    };
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
 
+  static navigationOptions = {
+    header: null
+  };
   async componentWillMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
@@ -46,49 +52,77 @@ export default class CreateProject extends Component {
       return <AppLoading />;
     }
     return (
+      <View style={{flex:1}}>
+      <Header style={{justifyContent: 'flex-start' ,backgroundColor:"orange"}}>
+      <Left>
+        <Button transparent
+            onPress={() => this.props.navigation.navigate("TasksScreen")}
+
+        >
+        <Icon name='md-arrow-back' />
+        </Button>
+      </Left>
+      <Body>
+        <Text style={{color:"white" , fontWeight:"bold"}}>
+          CREATE PROJECT
+        </Text>
+      </Body>
+      </Header>
+
       <ScrollView style={{ flex: 1 }}>
         <Container>
           <Content>
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Project Name </Text>
+              <Icon name='md-clipboard' />
+                <Text style={{ color: "#333333", fontSize:14 }}>Project Name </Text>
               </CardItem>
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input />
+                    <Input        
+                       onChangeText={pname => this.props.pname(pname)}
+                       />
                   </Item>
                 </Body>
               </CardItem>
             </Card>
 
             <Card style={{ borderWidth: 2 }}>
-              <CardItem header bordered>
-                <ScrollView>
-                  <Text style={{ color: "#333333" }}>Project Description </Text>
-                </ScrollView>
+            <CardItem header bordered>
+              <Icon name='md-create' />
+                <Text style={{ color: "#333333" , fontSize:14 }}>Project Description </Text>
               </CardItem>
+             
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input maxHeight={150} multiline={true} />
+                    <Input 
+                    maxHeight={150} multiline={true}
+                    onChangeText={description => this.props.description(description)}
+
+                     />
                   </Item>
                 </Body>
               </CardItem>
             </Card>
 
             <Card style={{ borderWidth: 2 }}>
-              <Text style={{ textAlign: "center" }}>Project Due Date:</Text>
+            <CardItem header bordered>
+              <Icon name='md-calendar' />
+              <Text style={{color: "#333333" , fontSize:14}}>Project Due Date</Text>             
+               </CardItem>
+             
               <DatePicker
                 defaultDate={new Date(2019, 5, 31)}
                 minimumDate={new Date(2018, 1, 1)}
-                maximumDate={new Date(2019, 12, 30)}
+                maximumDate={new Date(2023, 12, 30)}
                 locale={"en"}
                 timeZoneOffsetInMinutes={undefined}
                 modalTransparent={false}
                 animationType={"fade"}
                 androidMode={"calendar"}
-                placeHolderText="select"
+                placeHolderText="select date.."
                 textStyle={{ color: "red" }}
                 placeHolderTextStyle={{ color: "#7a7979" }}
                 onDateChange={this.setDate}
@@ -98,30 +132,41 @@ export default class CreateProject extends Component {
 
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Links: </Text>
+              <Icon name='md-link' />
+                <Text style={{ color: "#333333", fontSize:14 }}>Links: </Text>
               </CardItem>
               <CardItem>
                 <Body>
-                  <Item floatingLabel>
-                    <Input />
+                <Item floatingLabel>
+                    <Input
+                     maxHeight={120} multiline={true} 
+                     onChangeText={links => this.props.links(links)}
+
+                     />
                   </Item>
                 </Body>
               </CardItem>
             </Card>
 
+
             <Button
               style={{ backgroundColor: "orange", marginTop: 10 }}
               block
               success
-            >
-              <Text>Add Project</Text>
-            </Button>
+              onPress={() => this.props.navigation.navigate("CreateTask")}
+              >
+            <Text>Add Project</Text>
+          </Button>
+
           </Content>
         </Container>
       </ScrollView>
+      </View>
     );
   }
 }
+
+
 
 /*
 date picker current selected date.

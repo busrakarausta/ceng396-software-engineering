@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions , View} from "react-native";
 import {
   Button,
   Container,
@@ -10,7 +10,10 @@ import {
   CardItem,
   Body,
   Text,
-  DatePicker
+  DatePicker,
+  Header,
+  Icon,
+  Left
 } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import { Font, AppLoading } from "expo";
@@ -20,10 +23,18 @@ export default class CreateTask extends Component {
     super(props);
     this.state = { chosenDate: new Date(), loading: true };
     this.setDate = this.setDate.bind(this);
+    this.state = {
+      tname: "",
+      tdescription: ""
+    };
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
+
+  static navigationOptions = {
+    header: null
+  }; 
 
   async componentWillMount() {
     await Font.loadAsync({
@@ -40,18 +51,38 @@ export default class CreateTask extends Component {
     if (this.state.loading) {
       return <AppLoading />;
     }
+
+    
     return (
-      <ScrollView tyle={{ flex: 1 }}>
+      <View style={{flex:1}}>
+      <Header style={{justifyContent: 'flex-start' ,backgroundColor:"orange"}}>
+      <Left>
+        <Button transparent           
+             onPress={() => this.props.navigation.navigate("ProjectDetail")}     
+          >
+        <Icon name='md-arrow-back' />
+        </Button>
+      </Left>
+      <Body>
+        <Text style={{color:"#ffffff" , fontWeight:"bold"}}> CREATE TASK </Text>
+      </Body>
+      
+      </Header>
+
+      <ScrollView style={{ flex: 1 }}>
         <Container>
           <Content>
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Task Name </Text>
+              <Icon name='md-document' />
+                <Text style={{ color: "#333333" , fontSize:14  }}>Task Name </Text>
               </CardItem>
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input />
+                    <Input                    
+                        onChangeText={tname => this.props.tname(tname)}
+                    />
                   </Item>
                 </Body>
               </CardItem>
@@ -59,19 +90,27 @@ export default class CreateTask extends Component {
 
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Task Description </Text>
+              <Icon name='md-create' />
+                <Text style={{ color: "#333333" , fontSize:14 }}>Task Description </Text>
               </CardItem>
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input maxHeight={150} multiline={true} />
+                    <Input 
+                      maxHeight={150} multiline={true}
+                      onChangeText={tdescription => this.props.tdescription(tdescription)}
+
+                    />
                   </Item>
                 </Body>
               </CardItem>
             </Card>
 
             <Card style={{ borderWidth: 2 }}>
-              <Text style={{ textAlign: "center" }}>Task Due Date:</Text>
+            <CardItem header bordered>
+              <Icon name='md-calendar' />
+              <Text style={{   color: "#333333" , fontSize:14 }}>Task Due Date</Text>             
+               </CardItem>
               <DatePicker
                 defaultDate={new Date(2019, 5, 31)}
                 minimumDate={new Date(2018, 1, 1)}
@@ -81,7 +120,7 @@ export default class CreateTask extends Component {
                 modalTransparent={false}
                 animationType={"fade"}
                 androidMode={"calendar"}
-                placeHolderText="select"
+                placeHolderText="select date.."
                 textStyle={{ color: "red" }}
                 placeHolderTextStyle={{ color: "#7a7979" }}
                 onDateChange={this.setDate}
@@ -93,12 +132,15 @@ export default class CreateTask extends Component {
               style={{ backgroundColor: "orange", marginTop: 10 }}
               block
               success
+              onPress={() => this.props.navigation.navigate("Discover")}
+
             >
               <Text>Add Task</Text>
             </Button>
           </Content>
         </Container>
       </ScrollView>
+      </View>
     );
   }
 }

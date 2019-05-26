@@ -19,6 +19,7 @@ import TaskScreen from "./src/screens/TaskScreen";
 import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
 import CompletedScreen from "./src/screens/CompletedScreen";
+import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
 
@@ -53,6 +54,12 @@ const HomeNavigator = createStackNavigator(
 const WelcomeNavigator = createStackNavigator({
   TaskDetail: TaskDetail,
   TaskScreen: TaskScreen,
+  TaskScreen: TaskScreen,
+  ProjectDetail: ProjectDetail,
+  CreateProject: CreateProject,
+  DoneScreen: DoneScreen,
+  CreateTask: CreateTask,
+  DoneScreen: DoneScreen,
   Home: HomeNavigator,
   Signup: SignupScreen,
   Login: LoginScreen
