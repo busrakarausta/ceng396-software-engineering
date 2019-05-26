@@ -15,13 +15,14 @@ import DoingScreen from "./src/screens/DoingScreen";
 import BottomBar from "./src/components/BottomBar/BottomBar";
 import ToDoScreen from "./src/screens/ToDoScreen";
 import InProgressScreen from "./src/screens/InProgressScreen";
-import CompletedScreen from "./src/screens/CompletedScreen";
+import TaskScreen from "./src/screens/TaskScreen";
 import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
-import { MenuProvider } from "react-native-popup-menu";
+import { MenuProvider, Menu } from "react-native-popup-menu";
 
 const TabNavigation = createBottomTabNavigator(
   {
+<<<<<<< HEAD
     Discover: DiscoverScreen,
     CreateTask: CreateTask,
     CreateProject: CreateProject,
@@ -29,6 +30,11 @@ const TabNavigation = createBottomTabNavigator(
     ToDo: ToDoScreen,
     InProgress: InProgressScreen,
 
+=======
+   
+    CreateProject: CreateProject,
+    Discover: DiscoverScreen,
+>>>>>>> 162ed5d59ded2912751551d9ed032b418cf37113
     Done: DoneScreen,
     Doing: DoingScreen
   },
@@ -50,6 +56,7 @@ const HomeNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
+  TaskScreen:TaskScreen,
   Home: HomeNavigator,
   Signup: SignupScreen,
   Login: LoginScreen
@@ -62,7 +69,11 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
         <MenuProvider>
+<<<<<<< HEAD
           <AppContainer />
+=======
+        <AppContainer  />
+>>>>>>> 162ed5d59ded2912751551d9ed032b418cf37113
         </MenuProvider>
       </View>
     );
