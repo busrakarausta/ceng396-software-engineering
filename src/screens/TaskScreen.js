@@ -21,7 +21,7 @@ export default class TaskScreen extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{backgroundColor:"orange"}}>
           <Left>
             <Button transparent 
                 onPress={() => this.props.navigation.navigate("ProjectDetail")}
@@ -33,7 +33,7 @@ export default class TaskScreen extends Component {
 
           <Right>
             <Button transparent
-                onPress={() => this.props.navigation.navigate("DiscoverScreen")}
+                onPress={() => this.props.navigation.navigate("Discover")}
 
             >
               <Icon name="home" />

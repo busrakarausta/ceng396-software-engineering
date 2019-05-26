@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import Card from "../components/Card";
 import Timestamp from "react-timestamp";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { Left, Header, Right, Button, Icon } from "native-base";
 export default class DoingScreen extends Component {
   constructor() {
     super();

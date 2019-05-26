@@ -32,11 +32,11 @@ export default class ProjectDetail extends Component {
     return (
       <View style={{flex:1}}>
 
-      <Header style={{justifyContent: 'flex-start'}}>
+      <Header style={{justifyContent: 'flex-start',backgroundColor:"orange"}}>
         <Left>
           <Button transparent
           
-          onPress={() => this.props.navigation.navigate("DiscoverScreen")}
+          onPress={() => this.props.navigation.navigate("Discover")}
           >
           <Icon name='md-arrow-back' />
           </Button>

@@ -53,7 +53,7 @@ export default class CreateProject extends Component {
     }
     return (
       <View style={{flex:1}}>
-      <Header style={{justifyContent: 'flex-start'}}>
+      <Header style={{justifyContent: 'flex-start' ,backgroundColor:"orange"}}>
       <Left>
         <Button transparent
             onPress={() => this.props.navigation.navigate("TasksScreen")}

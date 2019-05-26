@@ -21,6 +21,7 @@ import CreateProject from "./src/screens/CreateProject";
 import CompletedScreen from "./src/screens/CompletedScreen";
 import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
+import TaskDetail from "./src/screens/TaskDetail";
 
 const TabNavigation = createBottomTabNavigator(
   {

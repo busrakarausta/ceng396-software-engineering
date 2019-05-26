@@ -55,7 +55,7 @@ export default class CreateTask extends Component {
     
     return (
       <View style={{flex:1}}>
-      <Header style={{justifyContent: 'flex-start'}}>
+      <Header style={{justifyContent: 'flex-start' ,backgroundColor:"orange"}}>
       <Left>
         <Button transparent           
              onPress={() => this.props.navigation.navigate("ProjectDetail")}     
@@ -132,7 +132,7 @@ export default class CreateTask extends Component {
               style={{ backgroundColor: "orange", marginTop: 10 }}
               block
               success
-              onPress={() => this.props.navigation.navigate("DiscoverScreen")}
+              onPress={() => this.props.navigation.navigate("Discover")}
 
             >
               <Text>Add Task</Text>

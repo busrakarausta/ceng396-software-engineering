@@ -1,23 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView} from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import Card from "../components/Card";
 import Timestamp from "react-timestamp";
-
-import {
-  Button,
-  Container,
-  Content,
-  Header,
-  Item,
-  Input,
-  Left,
-  Right,
-  CardItem,
-  Body,
-  DatePicker,
-  Icon
-} from "native-base";
-
+import { Left, Header, Right, Button, Icon } from "native-base";
 
 export default class DoneScreen extends Component {
   static navigationOptions = {
@@ -85,21 +70,19 @@ export default class DoneScreen extends Component {
                   />
         </Card>
         </ScrollView>
-    </View>   
+      </View>
     );
   }
 }
 
-
-const styles={
+const styles = {
   text: {
-    fontFamily: 'sans-serif',
+    fontFamily: "sans-serif",
     fontSize: 25,
     fontSize: 20,
-    fontWeight:"bold",
-    marginTop:15, 
-    marginBottom:15,
-    marginLeft:20
-
+    fontWeight: "bold",
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 20
   }
 };
