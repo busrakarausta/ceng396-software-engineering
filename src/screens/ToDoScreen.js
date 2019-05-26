@@ -42,7 +42,7 @@ const sources = [
 export default class ToDoScreen extends Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, marginTop: 10 }}>
         <FlatList
           data={sources}
           renderItem={({ item }) => (

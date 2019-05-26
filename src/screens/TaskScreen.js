@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Container, Tab, Tabs, ScrollableTab, Left, Header, Right, Button, Icon } from "native-base";
-import { Text, TouchableOpacity , View} from 'react-native';
+import {
+  Container,
+  Tab,
+  Tabs,
+  ScrollableTab,
+  Left,
+  Header,
+  Right,
+  Button,
+  Icon
+} from "native-base";
 import ToDoScreen from "./ToDoScreen";
 import InProgressScreen from "./InProgressScreen";
 import CompletedScreen from "./CompletedScreen";
@@ -11,22 +20,26 @@ export default class TaskScreen extends Component {
   };
   render() {
     return (
-      <Container >
-
+      <Container>
         <Header>
           <Left>
-            <Button transparent >
-            <Icon name='md-arrow-back' />
+            <Button transparent 
+                onPress={() => this.props.navigation.navigate("ProjectDetail")}
+
+            >
+              <Icon name="md-arrow-round-back" />
             </Button>
           </Left>
-         
+
           <Right>
-            <Button transparent>
-              <Icon name='home' />
+            <Button transparent
+                onPress={() => this.props.navigation.navigate("DiscoverScreen")}
+
+            >
+              <Icon name="home" />
             </Button>
           </Right>
         </Header>
-
 
         <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="To Do">

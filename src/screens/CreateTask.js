@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dimensions , View, Text} from "react-native";
+import { Dimensions , View} from "react-native";
 import {
   Button,
   Container,
@@ -23,10 +23,18 @@ export default class CreateTask extends Component {
     super(props);
     this.state = { chosenDate: new Date(), loading: true };
     this.setDate = this.setDate.bind(this);
+    this.state = {
+      tname: "",
+      tdescription: ""
+    };
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
+
+  static navigationOptions = {
+    header: null
+  }; 
 
   async componentWillMount() {
     await Font.loadAsync({
@@ -43,16 +51,20 @@ export default class CreateTask extends Component {
     if (this.state.loading) {
       return <AppLoading />;
     }
+
+    
     return (
       <View style={{flex:1}}>
       <Header style={{justifyContent: 'flex-start'}}>
       <Left>
-        <Button transparent >
+        <Button transparent           
+             onPress={() => this.props.navigation.navigate("ProjectDetail")}     
+          >
         <Icon name='md-arrow-back' />
         </Button>
       </Left>
       <Body>
-        <Text> X PROJECT </Text>
+        <Text style={{color:"#ffffff" , fontWeight:"bold"}}> CREATE TASK </Text>
       </Body>
       
       </Header>
@@ -68,7 +80,9 @@ export default class CreateTask extends Component {
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input />
+                    <Input                    
+                        onChangeText={tname => this.props.tname(tname)}
+                    />
                   </Item>
                 </Body>
               </CardItem>
@@ -82,7 +96,11 @@ export default class CreateTask extends Component {
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input maxHeight={150} multiline={true} />
+                    <Input 
+                      maxHeight={150} multiline={true}
+                      onChangeText={tdescription => this.props.tdescription(tdescription)}
+
+                    />
                   </Item>
                 </Body>
               </CardItem>
@@ -114,6 +132,8 @@ export default class CreateTask extends Component {
               style={{ backgroundColor: "orange", marginTop: 10 }}
               block
               success
+              onPress={() => this.props.navigation.navigate("DiscoverScreen")}
+
             >
               <Text>Add Task</Text>
             </Button>

@@ -1,49 +1,105 @@
 import React, { Component } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, View, Image, Text ,FlatList, TouchableOpacity} from "react-native";
 import {
   Button,
-  Container,
-  Content,
-  Item,
-  Input,
-  Card,
-  CardItem,
+  Icon,
+  Header,
   Body,
-  Text,
-  DatePicker
-} from "native-base";
-import { ScrollView } from "react-native-gesture-handler";
+  Left} from "native-base";
 import { Font, AppLoading } from "expo";
 
-export default class CreateTask extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { chosenDate: new Date(), loading: true };
-    this.setDate = this.setDate.bind(this);
-  }
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
-  }
 
-  async componentWillMount() {
-    await Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
-      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
-    });
-    this.setState({ loading: false });
+const sources = [
+  {
+    name: "karaustabusra",
+    deadline: "12/02/2020",
+    desc: "You added a new task to Xamarin Basics."
   }
+];
+
+
+export default class ProjectDetail extends Component {
+  
+
+  static navigationOptions = {
+    header: null
+  };
 
   render() {
     let { width } = Dimensions.get("window");
     width = width * 0.9;
-    if (this.state.loading) {
-      return <AppLoading />;
-    }
+
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <View style={{flex:1}}>
+
+      <Header style={{justifyContent: 'flex-start'}}>
+        <Left>
+          <Button transparent
+          
+          onPress={() => this.props.navigation.navigate("DiscoverScreen")}
+          >
+          <Icon name='md-arrow-back' />
+          </Button>
+        </Left>  
+        <Body>
+        <Text style={{color:"white" , fontWeight:"bold"}}>
+          DETAILS
+        </Text>
+      </Body>    
+      </Header>
+      <FlatList
+          data={sources}
+          renderItem={({ item }) => (
+            <Text desc={item.desc} option="Done" name={item.name} />
+          )}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      
         
-      </ScrollView>
+                
+                <View style={{alignSelf:"flex-end", marginBottom:6}}>
+                  <TouchableOpacity            
+                     onPress={() => this.props.navigation.navigate("CreateTask")}
+                  >
+                <Image source={require('../images/addIcon.png')} />
+                </TouchableOpacity>
+                </View>
+                
+      </View>
     );
   }
 }
+
+/*
+
+      <Text
+                style={{
+                  fontSize: 25,
+                  alignSelf: "center"
+                }}
+              >
+                {sources.name}
+              </Text>     
+            
+                <Text
+                  style={{
+                    fontSize: 20,
+                    alignSelf: "center",
+                   
+                  }}
+                >
+                  {sources.deadline}
+                </Text>
+                       
+                <Text
+                  style={{
+                    fontSize: 20,
+                    alignSelf: "center",
+                   
+                  }}
+                >
+                  {sources.description}
+                </Text>
+
+*/

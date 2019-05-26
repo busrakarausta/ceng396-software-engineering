@@ -23,6 +23,11 @@ export default class CreateProject extends Component {
     super(props);
     this.state = { chosenDate: new Date(), loading: true };
     this.setDate = this.setDate.bind(this);
+    this.state = {
+      pname: "",
+      description: "",
+      links:""
+    };
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
@@ -50,11 +55,18 @@ export default class CreateProject extends Component {
       <View style={{flex:1}}>
       <Header style={{justifyContent: 'flex-start'}}>
       <Left>
-        <Button transparent >
+        <Button transparent
+            onPress={() => this.props.navigation.navigate("TasksScreen")}
+
+        >
         <Icon name='md-arrow-back' />
         </Button>
       </Left>
-      
+      <Body>
+        <Text style={{color:"white" , fontWeight:"bold"}}>
+          CREATE PROJECT
+        </Text>
+      </Body>
       </Header>
 
       <ScrollView style={{ flex: 1 }}>
@@ -68,7 +80,9 @@ export default class CreateProject extends Component {
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input />
+                    <Input        
+                       onChangeText={pname => this.props.pname(pname)}
+                       />
                   </Item>
                 </Body>
               </CardItem>
@@ -83,7 +97,11 @@ export default class CreateProject extends Component {
               <CardItem>
                 <Body>
                   <Item floatingLabel>
-                    <Input maxHeight={150} multiline={true} />
+                    <Input 
+                    maxHeight={150} multiline={true}
+                    onChangeText={description => this.props.description(description)}
+
+                     />
                   </Item>
                 </Body>
               </CardItem>
@@ -98,7 +116,7 @@ export default class CreateProject extends Component {
               <DatePicker
                 defaultDate={new Date(2019, 5, 31)}
                 minimumDate={new Date(2018, 1, 1)}
-                maximumDate={new Date(2019, 12, 30)}
+                maximumDate={new Date(2023, 12, 30)}
                 locale={"en"}
                 timeZoneOffsetInMinutes={undefined}
                 modalTransparent={false}
@@ -120,7 +138,11 @@ export default class CreateProject extends Component {
               <CardItem>
                 <Body>
                 <Item floatingLabel>
-                    <Input maxHeight={120} multiline={true} />
+                    <Input
+                     maxHeight={120} multiline={true} 
+                     onChangeText={links => this.props.links(links)}
+
+                     />
                   </Item>
                 </Body>
               </CardItem>
@@ -128,12 +150,14 @@ export default class CreateProject extends Component {
 
 
             <Button
-              style={{ backgroundColor: "orange", marginTop: 6 }}
+              style={{ backgroundColor: "orange", marginTop: 10 }}
               block
               success
-            >
-              <Text>Add Project</Text>
-            </Button>
+              onPress={() => this.props.navigation.navigate("CreateTask")}
+              >
+            <Text>Add Project</Text>
+          </Button>
+
           </Content>
         </Container>
       </ScrollView>
