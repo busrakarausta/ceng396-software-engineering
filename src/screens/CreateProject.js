@@ -1,22 +1,20 @@
 import React, { Component } from "react";
-import { Dimensions, FlatList, ScrollView } from "react-native";
+import { Dimensions, ScrollView,View } from "react-native";
+
 import {
   Button,
   Container,
   Content,
   Header,
-  Form,
   Item,
-  Label,
   Input,
-  InputGroup,
   Left,
-  Right,
   Card,
   CardItem,
   Body,
   Text,
-  DatePicker
+  DatePicker,
+  Icon
 } from "native-base";
 import { Font, AppLoading } from "expo";
 
@@ -30,6 +28,9 @@ export default class CreateProject extends Component {
     this.setState({ chosenDate: newDate });
   }
 
+  static navigationOptions = {
+    header: null
+  };
   async componentWillMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
@@ -46,12 +47,23 @@ export default class CreateProject extends Component {
       return <AppLoading />;
     }
     return (
+      <View style={{flex:1}}>
+      <Header style={{justifyContent: 'flex-start'}}>
+      <Left>
+        <Button transparent >
+        <Icon name='md-arrow-back' />
+        </Button>
+      </Left>
+      
+      </Header>
+
       <ScrollView style={{ flex: 1 }}>
         <Container>
           <Content>
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Project Name </Text>
+              <Icon name='md-clipboard' />
+                <Text style={{ color: "#333333", fontSize:14 }}>Project Name </Text>
               </CardItem>
               <CardItem>
                 <Body>
@@ -63,11 +75,11 @@ export default class CreateProject extends Component {
             </Card>
 
             <Card style={{ borderWidth: 2 }}>
-              <CardItem header bordered>
-                <ScrollView>
-                  <Text style={{ color: "#333333" }}>Project Description </Text>
-                </ScrollView>
+            <CardItem header bordered>
+              <Icon name='md-create' />
+                <Text style={{ color: "#333333" , fontSize:14 }}>Project Description </Text>
               </CardItem>
+             
               <CardItem>
                 <Body>
                   <Item floatingLabel>
@@ -78,7 +90,11 @@ export default class CreateProject extends Component {
             </Card>
 
             <Card style={{ borderWidth: 2 }}>
-              <Text style={{ textAlign: "center" }}>Project Due Date:</Text>
+            <CardItem header bordered>
+              <Icon name='md-calendar' />
+              <Text style={{color: "#333333" , fontSize:14}}>Project Due Date</Text>             
+               </CardItem>
+             
               <DatePicker
                 defaultDate={new Date(2019, 5, 31)}
                 minimumDate={new Date(2018, 1, 1)}
@@ -88,7 +104,7 @@ export default class CreateProject extends Component {
                 modalTransparent={false}
                 animationType={"fade"}
                 androidMode={"calendar"}
-                placeHolderText="select"
+                placeHolderText="select date.."
                 textStyle={{ color: "red" }}
                 placeHolderTextStyle={{ color: "#7a7979" }}
                 onDateChange={this.setDate}
@@ -98,19 +114,21 @@ export default class CreateProject extends Component {
 
             <Card style={{ borderWidth: 2 }}>
               <CardItem header bordered>
-                <Text style={{ color: "#333333" }}>Links: </Text>
+              <Icon name='md-link' />
+                <Text style={{ color: "#333333", fontSize:14 }}>Links: </Text>
               </CardItem>
               <CardItem>
                 <Body>
-                  <Item floatingLabel>
-                    <Input />
+                <Item floatingLabel>
+                    <Input maxHeight={120} multiline={true} />
                   </Item>
                 </Body>
               </CardItem>
             </Card>
 
+
             <Button
-              style={{ backgroundColor: "orange", marginTop: 10 }}
+              style={{ backgroundColor: "orange", marginTop: 6 }}
               block
               success
             >
@@ -119,9 +137,12 @@ export default class CreateProject extends Component {
           </Content>
         </Container>
       </ScrollView>
+      </View>
     );
   }
 }
+
+
 
 /*
 date picker current selected date.

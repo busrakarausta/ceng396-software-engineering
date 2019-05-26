@@ -13,10 +13,10 @@ export default class TaskScreen extends Component {
     return (
       <Container >
 
-<Header>
+        <Header>
           <Left>
             <Button transparent >
-            <Icon name='back' />
+            <Icon name='md-arrow-back' />
             </Button>
           </Left>
          
