@@ -20,6 +20,7 @@ import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
 import CompletedScreen from "./src/screens/CompletedScreen";
 import { MenuProvider, Menu } from "react-native-popup-menu";
+import TaskDetail from "./src/screens/TaskDetail";
 
 const TabNavigation = createBottomTabNavigator(
   {
@@ -63,7 +64,7 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
         <MenuProvider>
-          <AppContainer />
+          <DoingScreen />
         </MenuProvider>
       </View>
     );

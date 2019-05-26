@@ -3,14 +3,26 @@ import { View, Text } from "react-native";
 import Card from "../components/Card";
 import Timestamp from "react-timestamp";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { Left, Header, Right, Button, Icon } from "native-base";
 export default class DoingScreen extends Component {
   constructor() {
     super();
   }
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
+        <Header style={{ backgroundColor: "orange" }}>
+          <Left>
+            <Button transparent>
+              <Icon style={{ color: "black" }} name="md-arrow-round-back" />
+            </Button>
+          </Left>
+          <Right>
+            <Button transparent>
+              <Icon style={{ color: "black" }} name="home" />
+            </Button>
+          </Right>
+        </Header>
         <Text style={styles.text}>Doing</Text>
         <ScrollView>
           <Card
