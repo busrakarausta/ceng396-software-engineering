@@ -22,12 +22,13 @@ import { MenuProvider } from "react-native-popup-menu";
 
 const TabNavigation = createBottomTabNavigator(
   {
+    Discover: DiscoverScreen,
     CreateTask: CreateTask,
     CreateProject: CreateProject,
     Completed: CompletedScreen,
     ToDo: ToDoScreen,
     InProgress: InProgressScreen,
-    Discover: DiscoverScreen,
+
     Done: DoneScreen,
     Doing: DoingScreen
   },
@@ -42,17 +43,16 @@ const HomeNavigator = createStackNavigator(
   {
     headerMode: "none",
     navigationOptions: {
-      title: "  ",
+      title: "Discover  ",
       header: (navigation, props) => <Header {...props} {...navigation} />
     }
   }
 );
 
 const WelcomeNavigator = createStackNavigator({
+  Home: HomeNavigator,
   Signup: SignupScreen,
-  Login: LoginScreen,
-
-  Home: HomeNavigator
+  Login: LoginScreen
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);

@@ -38,15 +38,11 @@ export default class ButtonSubmit extends Component {
     const { email, password, username } = this.props;
 
     axios
-      .post(
-        "http://192.168.1.34:3000/user/",
-
-        {
-          username: username,
-          password: password,
-          email: email
-        }
-      )
+      .post("http://192.168.56.1:3000/user/", {
+        username: username,
+        password: password,
+        email: email
+      })
       .then(response => {
         console.log(response);
         SecureStore.setItemAsync("secure_token", response.data.token);
@@ -61,17 +57,16 @@ export default class ButtonSubmit extends Component {
     const { email, password } = this.props;
 
     axios
-      .post("http://192.168.1.34:3000/auth/", {
+      .post("http://192.168.0.28:3000/auth/", {
         email: email,
         password: password
       })
       .then(response => {
-        console.log(response);
+        SecureStore.setItemAsync("secure_token", response.data.token);
       })
       .catch(error => {
         console.error("loginAction:", error);
       });
-    console.log(email);
   }
 
   _onPress() {
@@ -91,8 +86,8 @@ export default class ButtonSubmit extends Component {
   }
   _navigateTo = () => {
     console.log(this.props.username);
-    if (!this.props.username) this._actionLogin();
-    if (this.props.username) this._actionSignup();
+    if (this.props.username == null) this._actionLogin();
+    else if (this.props.username != null) this._actionSignup();
     this.props.onPress();
   };
 
