@@ -51,6 +51,7 @@ const HomeNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
+  TaskDetail: TaskDetail,
   TaskScreen: TaskScreen,
   Home: HomeNavigator,
   Signup: SignupScreen,
@@ -64,7 +65,7 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
         <MenuProvider>
-          <DoingScreen />
+          <AppContainer />
         </MenuProvider>
       </View>
     );
