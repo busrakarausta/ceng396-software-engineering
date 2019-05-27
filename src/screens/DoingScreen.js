@@ -11,19 +11,6 @@ export default class DoingScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-      <Header style={{ backgroundColor: "orange" }}>
-        <Left>
-          <Button transparent>
-            <Icon style={{ color: "black" }} name="md-arrow-round-back" />
-          </Button>
-        </Left>
-        <Right>
-          <Button transparent>
-            <Icon style={{ color: "black" }} name="home" />
-          </Button>
-        </Right>
-      </Header>
-        <Text style={styles.text}>Doing</Text>
         <ScrollView>
           <Card
             // onPress={() => }

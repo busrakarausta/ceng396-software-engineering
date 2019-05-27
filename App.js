@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, SafeAreaView, ScrollView } from "react-native";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignupScreen from "./src/screens/SignupScreen";
 import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  TabNavigator
+  DrawerItems,
+  createDrawerNavigator
 } from "react-navigation";
 import DiscoverScreen from "./src/screens/DiscoverScreen";
 import Header from "./src/components/Header";
@@ -26,39 +27,61 @@ import TaskDetail from "./src/screens/TaskDetail";
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
-    CreateTask: CreateTask,
-    CreateProject: CreateProject,
-    Completed: CompletedScreen,
-    ToDo: ToDoScreen,
-    InProgress: InProgressScreen,
     Done: DoneScreen,
     Doing: DoingScreen
   },
   {
-    tabBarComponent: (navigation, props) => <BottomBar {...props} />
+    tabBarComponent: props => <BottomBar {...props} />
   }
 );
-const HomeNavigator = createStackNavigator(
+const CustomDrawerComponent = props => (
+  <SafeAreaView
+    style={{
+      flex: 1
+    }}
+  >
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </SafeAreaView>
+);
+
+const HomeNavigator = createDrawerNavigator(
   {
-    Tab: TabNavigation
+    Home: TabNavigation
   },
   {
     headerMode: "none",
+    contentComponent: CustomDrawerComponent,
     navigationOptions: {
-      title: "Discover  ",
-      header: (navigation, props) => <Header {...props} {...navigation} />
+      title: "Discover",
+      header: props => (
+        <Header
+          {...props}
+          openDrawer={() => this.props.navigation.openDrawer()}
+        />
+      )
+    }
+  }
+);
+
+const ProjectNavigator = createStackNavigator(
+  {
+    TaskScreen: TaskScreen,
+    ProjectDetail: ProjectDetail,
+    CreateProject: CreateProject,
+    CreateTask: CreateTask
+  },
+  {
+    navigationOptions: {
+      header: null
     }
   }
 );
 
 const WelcomeNavigator = createStackNavigator({
-  TaskScreen: TaskScreen,  
-  ProjectDetail: ProjectDetail,
-  CreateProject: CreateProject,
-  DoneScreen:DoneScreen,
-  CreateTask: CreateTask,
-  DoneScreen: DoneScreen,
   Home: HomeNavigator,
+  Project: ProjectNavigator,
   Signup: SignupScreen,
   Login: LoginScreen
 });

@@ -4,6 +4,7 @@ import {
   TouchableHighlight,
   Dimensions,
   Animated,
+  Text,
   Image
 } from "react-native";
 import React, { Component } from "react";
@@ -32,14 +33,14 @@ class TabBarItem extends Component {
       );
     }
 
-    return <View style={{ flex: 1 }}>{child}</View>;
+    return <View style={{ backgroundColor: "transparent" }}>{child}</View>;
   }
 }
 
 export default class StaticBar extends Component {
   constructor(props) {
     super(props);
-
+    this._navigateTo = this._navigateTo.bind(this);
     if (this.props.children.length != 3) {
       throw new Error("Three tab should be work.");
     }
@@ -72,6 +73,12 @@ export default class StaticBar extends Component {
     });
   }
 
+  _navigateTo(i) {
+    if (i == 0) this.props.navigation.navigate("Doing");
+    if (i == 1) this.props.navigation.navigate("Discover");
+    if (i == 2) this.props.navigation.navigate("Done");
+  }
+
   render() {
     const { children } = this.props;
     const {
@@ -101,13 +108,18 @@ export default class StaticBar extends Component {
           {React.Children.map(children, (child, i) => {
             const imgSrc =
               selectedIndex == i && showIcon ? (
-                <View style={styles.circle}>
+                <TouchableHighlight
+                  onPress={() =>
+                    this.props.navigation.navigate("CreateProject")
+                  }
+                  style={styles.circle}
+                >
                   <Image
                     style={styles.navImage}
                     resizeMode="cover"
                     source={child.props.selectedIcon}
                   />
-                </View>
+                </TouchableHighlight>
               ) : (
                 <Image
                   style={styles.navImage}
@@ -118,6 +130,7 @@ export default class StaticBar extends Component {
             return (
               <TouchableHighlight
                 key={i}
+                onPressOut={() => this._navigateTo(i)}
                 underlayColor={"transparent"}
                 style={styles.navItem}
                 onPress={() => this.update(i)}
@@ -226,14 +239,8 @@ export default class StaticBar extends Component {
 }
 StaticBar.Item = TabBarItem;
 const styles = StyleSheet.create({
-  container: {
-    flex: 0.2,
-    zIndex: -5,
-    top: 0,
-    left: 0,
-    right: 0
-  },
   content: {
+    backgroundColor: "transparent",
     flexDirection: "column",
     zIndex: -1,
     width: "100%",
@@ -269,13 +276,3 @@ const styles = StyleSheet.create({
     bottom: 10
   }
 });
-/*      <View
-        style={[
-          styles.container,
-          this.props.style,
-          children[this.state.selectedIndex].props.screenBackgroundColor
-            ? children[this.state.selectedIndex].props.screenBackgroundColor
-            : "transparent"
-        ]}
-      >
-        {children[selectedIndex]}*/

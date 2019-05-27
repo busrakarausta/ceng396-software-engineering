@@ -11,64 +11,51 @@ export default class DoneScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-      <Header style={{ backgroundColor: "orange" }}>
-        <Left>
-          <Button transparent  onPress={() => this.props.navigation.navigate("Discover")}>
-            <Icon style={{ color: "black" }} name="md-arrow-round-back" />
-          </Button>
-        </Left>
-        <Right>
-          <Button transparent  onPress={() => this.props.navigation.navigate("Discover")}>
-            <Icon style={{ color: "black" }} name="home" />
-          </Button>
-        </Right>
-      </Header>
-      <Text style={styles.text}>Done</Text>
-      <ScrollView>
-              <Card
-                 // onPress={() => }
-                  title={"Reporter"}
-                 // subtitle=""
-                 status={"Begginer"}
-                >               
-                  <Timestamp
-                    style={{ color: "gray" }}
-                    time={1532102040}
-                    format="full"
-                    includeDay
-                    component={Text}
-                  />
-        </Card>
-              
-        <Card
-                 // onPress={() => }
-                  title={"English Speaking"}
-                 // subtitle=""
-                 status={"Well"}
-                >               
-                  <Timestamp
-                    style={{ color: "green" }}
-                    time={1532102040}
-                    format="full"
-                    includeDay
-                    component={Text}
-                  />
-        </Card>
-          
-        <Card
-                 // onPress={() => }
-                  title={"Web Development"}
-                 // subtitle=""
-                 status={"Bad"}
-                >               
-                  <Timestamp
-                    style={{ color: "red" }}
-                    time={1532102040}
-                    format="full"
-                    includeDay
-                    component={Text}
-                  />
-        </Card>
+        <ScrollView>
+          <Card
+            // onPress={() => }
+            title={"Reporter"}
+            // subtitle=""
+            status={"Begginer"}
+          >
+            <Timestamp
+              style={{ color: "gray" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
+
+          <Card
+            // onPress={() => }
+            title={"English Speaking"}
+            // subtitle=""
+            status={"Well"}
+          >
+            <Timestamp
+              style={{ color: "green" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
+
+          <Card
+            // onPress={() => }
+            title={"Web Development"}
+            // subtitle=""
+            status={"Bad"}
+          >
+            <Timestamp
+              style={{ color: "red" }}
+              time={1532102040}
+              format="full"
+              includeDay
+              component={Text}
+            />
+          </Card>
         </ScrollView>
       </View>
     );
