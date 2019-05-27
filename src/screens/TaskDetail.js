@@ -21,36 +21,6 @@ const sources = [
     deadline: "12/02/2020",
     desc: "You added a new task to Xamarin Basics.",
     comment: "deneme comment"
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Büşra Karausta deleted Management task of Github Project."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Büşra Karausta deleted Management task of Github Project."
   }
 ];
 
@@ -59,72 +29,76 @@ export default class TaskDetail extends React.Component {
     super();
     this.state = { loading: true };
   }
-  async componentWillMount() {
-    await Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
-      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
-    });
-    this.setState({ loading: false });
-  }
   render() {
     return (
       <Modal
-        isVisible={this.props.isVisible}
+        isVisible={true} //{this.props.isVisible}
         hasBackdrop={true}
         onBackdropPress={this.props.onBackdropPress}
         style={{
           borderRadius: 20,
-          marginTop: height / 1.7,
+          marginTop: 20,
           position: "absolute",
           padding: 20,
-          backgroundColor: "rgba(255,255,255,0.8)",
+          //  backgroundColor: "rgba(255,255,255,0.8)",
           alignSelf: "center",
           width: width / 1.5,
-          height: height / 3.6
+          height: height / 1.5,
+          backgroundColor: "pink"
         }}
       >
-        <TaskCard
+        <Text
           style={{
-            alignItems: "center"
+            fontWeight: "bold",
+            fontSize: 18,
+            textAlign: "left",
+            padding: 7
           }}
         >
-          <CardItem
-            cardBody
-            style={{
-              margin: 7
-            }}
-          >
-            <Left>
-              <Body>
-                <Text note style={{ color: "blue" }}>
-                  {sources.name}
-                </Text>
-              </Body>
-            </Left>
-          </CardItem>
-          <CardItem cardBody style={{ width: "90%", height: "18%" }}>
-            <Text note numberOfLines={2}>
-              {sources.comment}
-            </Text>
-          </CardItem>
-          <CardItem
-            cardBody
-            style={{
-              margin: 7
-            }}
-          >
-            <Body style={{ margin: 7, flexDirection: "row" }}>
-              <Button transparent>
-                <Icon style={{ fontSize: 20 }} active name="thumbs-up" />
-              </Button>
-
-              <Button transparent>
-                <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
-              </Button>
-            </Body>
-          </CardItem>
-        </TaskCard>
+          Task Name:{sources.name}
+          <Text style={{ fontWeight: "normal" }}> Task 1 </Text>
+        </Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            textAlign: "left",
+            padding: 7
+          }}
+        >
+          Task Detail:{sources.desc}
+          <Text style={{ fontWeight: "normal" }}> I'm task description </Text>
+        </Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            textAlign: "left",
+            padding: 7
+          }}
+        >
+          Due Date:{sources.deadline}
+          <Text style={{ fontWeight: "normal" }}> I'm duedate </Text>
+        </Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 18,
+            textAlign: "left",
+            padding: 7
+          }}
+        >
+          Comments {sources.comment} {"\n"}
+          <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
+          <Text style={{ fontWeight: "normal" }}> We are comments </Text>
+          {"\n"}
+          <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
+          <Text style={{ fontWeight: "normal" }}> We are comments </Text>
+          {"\n"}
+          <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
+          <Text style={{ fontWeight: "normal" }}> We are comments </Text>
+          {"\n"}
+        </Text>
       </Modal>
     );
   }
