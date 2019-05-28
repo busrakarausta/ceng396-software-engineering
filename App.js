@@ -23,6 +23,7 @@ import CompletedScreen from "./src/screens/CompletedScreen";
 import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
+import UserProfile from "./src/screens/UserProfile";
 
 const TabNavigation = createBottomTabNavigator(
   {
@@ -93,7 +94,7 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
         <MenuProvider>
-          <AppContainer />
+          < UserProfile />
         </MenuProvider>
       </View>
     );
