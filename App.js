@@ -24,6 +24,7 @@ import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
 import UserProfile from "./src/screens/UserProfile";
+import Settings from "./src/screens/Settings";
 
 const TabNavigation = createBottomTabNavigator(
   {
@@ -68,6 +69,8 @@ const HomeNavigator = createDrawerNavigator(
 
 const ProjectNavigator = createStackNavigator(
   {
+    Settings:Settings,
+    UserProfile:UserProfile,
     TaskScreen: TaskScreen,
     ProjectDetail: ProjectDetail,
     CreateProject: CreateProject,
@@ -94,7 +97,7 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
         <MenuProvider>
-          < UserProfile />
+          <AppContainer />
         </MenuProvider>
       </View>
     );
