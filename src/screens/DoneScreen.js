@@ -58,7 +58,14 @@ export default class DoneScreen extends Component {
         <FlatList
           data={this.state.projects}
           renderItem={({ item }) => (
-            <Card title={item.name}>
+            <Card
+              title={item.name}
+              onPress={() =>
+                this.props.navigation.navigate("ProjectDetail", {
+                  project: item
+                })
+              }
+            >
               <Timestamp
                 style={{ color: "gray" }}
                 time={item.timeStamp}

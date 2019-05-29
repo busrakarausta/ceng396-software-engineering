@@ -4,16 +4,8 @@ import { View, Text, Platform, TouchableHighlight, Image } from "react-native";
 export default class Card extends Component {
   constructor(props) {
     super(props);
+  }
 
-    this.state = {
-      status: ""
-    };
-  }
-  componentWillMount(i) {
-    if (i == 0) this.setState({ status: "Waste" });
-    else if (i == 1) this.setState({ status: "Well" });
-    else if (i == 2) this.setState({ status: "Advanced" });
-  }
   render() {
     const {
       title,
@@ -29,7 +21,7 @@ export default class Card extends Component {
     return (
       <TouchableHighlight
         style={[styles.containerStyle, { borderColor: bordercolor }]}
-        //onPress={onPress}
+        onPress={onPress}
       >
         <View style={styles.innerContainer}>
           <View style={{ justifyContent: "space-between" }}>

@@ -1,25 +1,32 @@
 import React, { Component } from "react";
-import { Dimensions, View, Image, Text ,FlatList, TouchableOpacity} from "react-native";
 import {
-  Button,
-  Icon,
-  Header,
-  Body,
-  Left} from "native-base";
+  Dimensions,
+  View,
+  Image,
+  Text,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
+import { Button, Icon, Header, Body, Left } from "native-base";
 import { Font, AppLoading } from "expo";
 
-
-const sources = [
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics."
-  }
-];
-
-
 export default class ProjectDetail extends Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      project: props.navigation.state.params.project
+    };
+  }
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+    });
+    this.setState({ loading: false });
+    console.log(this.state.project);
+  }
 
   static navigationOptions = {
     header: null
@@ -28,78 +35,39 @@ export default class ProjectDetail extends Component {
   render() {
     let { width } = Dimensions.get("window");
     width = width * 0.9;
-
+    if (this.state.loading) {
+      return <AppLoading />;
+    }
     return (
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
+        <Header
+          style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
+        >
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Discover")}
+            >
+              <Icon name="md-arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Text style={{ color: "white", fontWeight: "bold" }}>DETAILS</Text>
+          </Body>
+        </Header>
+        <View style={{ flex: 1 }}>
+          <Text>{this.state.project.desc}</Text>
+          <Text>{this.state.project.name}</Text>
+        </View>
 
-      <Header style={{justifyContent: 'flex-start',backgroundColor:"orange"}}>
-        <Left>
-          <Button transparent
-          
-          onPress={() => this.props.navigation.navigate("Discover")}
+        <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("CreateTask")}
           >
-          <Icon name='md-arrow-back' />
-          </Button>
-        </Left>  
-        <Body>
-        <Text style={{color:"white" , fontWeight:"bold"}}>
-          DETAILS
-        </Text>
-      </Body>    
-      </Header>
-      <FlatList
-          data={sources}
-          renderItem={({ item }) => (
-            <Text desc={item.desc} option="Done" name={item.name} />
-          )}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      
-        
-                
-                <View style={{alignSelf:"flex-end", marginBottom:6}}>
-                  <TouchableOpacity            
-                     onPress={() => this.props.navigation.navigate("CreateTask")}
-                  >
-                <Image source={require('../images/addIcon.png')} />
-                </TouchableOpacity>
-                </View>
-                
+            <Image source={require("../images/addIcon.png")} />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
-
-/*
-
-      <Text
-                style={{
-                  fontSize: 25,
-                  alignSelf: "center"
-                }}
-              >
-                {sources.name}
-              </Text>     
-            
-                <Text
-                  style={{
-                    fontSize: 20,
-                    alignSelf: "center",
-                   
-                  }}
-                >
-                  {sources.deadline}
-                </Text>
-                       
-                <Text
-                  style={{
-                    fontSize: 20,
-                    alignSelf: "center",
-                   
-                  }}
-                >
-                  {sources.description}
-                </Text>
-
-*/
