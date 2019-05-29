@@ -23,6 +23,8 @@ import CompletedScreen from "./src/screens/CompletedScreen";
 import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
+import UserProfile from "./src/screens/UserProfile";
+import Settings from "./src/screens/Settings";
 
 const TabNavigation = createBottomTabNavigator({
   Discover: DiscoverScreen,
@@ -62,6 +64,8 @@ const HomeNavigator = createDrawerNavigator(
 
 const ProjectNavigator = createStackNavigator(
   {
+    Settings:Settings,
+    UserProfile:UserProfile,
     TaskScreen: TaskScreen,
     ProjectDetail: ProjectDetail,
     CreateProject: CreateProject,
