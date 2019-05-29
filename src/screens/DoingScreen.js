@@ -1,90 +1,77 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList, AsyncStorage } from "react-native";
 import Card from "../components/Card";
+import axios from "axios";
 import Timestamp from "react-timestamp";
-import { ScrollView } from "react-native-gesture-handler";
-import { Left, Header, Right, Button, Icon } from "native-base";
+import { ACCESSTOKEN, CURRENT_ID, PROJECT, BASEURL } from "../const/base_const";
+
 export default class DoingScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = { projects: [], token: "", current_id: "", status: 1 };
   }
+
+  componentWillMount() {
+    this._getProjects();
+  }
+  _retrieveData = async name => {
+    try {
+      const value = await AsyncStorage.getItem(name);
+      console.log(value);
+      if (name == ACCESSTOKEN) {
+        this.setState({ token: value });
+        console.log(this.state.token);
+      } else this.setState({ current_id: value });
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  _getProjects = async () => {
+    try {
+      await this._retrieveData(ACCESSTOKEN);
+      await this._retrieveData(CURRENT_ID);
+    } catch (error) {}
+    if (this.state.current_id) {
+      axios
+        .get(
+          BASEURL + PROJECT + this.state.current_id + "/" + this.state.status,
+          {
+            headers: { Authorization: this.state.token }
+          }
+        )
+        .then(response => {
+          this.setState({ projects: response.data });
+          console.log(this.state.projects);
+        })
+        .catch(error => {
+          console.error("ProjectAction:", error);
+        });
+    } else console.log("state is empty");
+  };
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView>
-          <Card
-            // onPress={() => }
-            title={"Task Design"}
-            // subtitle=""
-            status={"Begginer"}
-          >
-            <Timestamp
-              style={{ color: "gray" }}
-              time={1532102040}
-              format="full"
-              includeDay
-              component={Text}
-            />
-          </Card>
-
-          <Card
-            // onPress={() => }
-            title={"Product Updates"}
-            // subtitle=""
-            status={"Well"}
-          >
-            <Timestamp
-              style={{ color: "green" }}
-              time={1532102040}
-              format="full"
-              includeDay
-              component={Text}
-            />
-          </Card>
-
-          <Card
-            // onPress={() => }
-            title={"Time Implementation"}
-            // subtitle=""
-            status={"Bad"}
-          >
-            <Timestamp
-              style={{ color: "red" }}
-              time={1532102040}
-              format="full"
-              includeDay
-              component={Text}
-            />
-          </Card>
-
-          <Card
-            // onPress={() => }
-            title={"Game"}
-            // subtitle=""
-            status={"Well"}
-          >
-            <Timestamp
-              style={{ color: "green" }}
-              time={1532102040}
-              format="full"
-              includeDay
-              component={Text}
-            />
-          </Card>
-        </ScrollView>
+        <FlatList
+          data={this.state.projects}
+          renderItem={({ item }) => (
+            <Card
+              // onPress={() => }
+              title={item.name}
+            >
+              <Timestamp
+                style={{ color: "gray" }}
+                time={item.timeStamp}
+                format="full"
+                includeDay
+                component={Text}
+              />
+            </Card>
+          )}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+        />
       </View>
     );
   }
 }
-
-const styles = {
-  text: {
-    fontFamily: "sans-serif",
-    fontSize: 25,
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 15,
-    marginBottom: 15,
-    marginLeft: 20
-  }
-};

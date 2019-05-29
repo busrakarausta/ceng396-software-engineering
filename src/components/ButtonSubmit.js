@@ -1,24 +1,26 @@
 import React, { Component } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
+import {
+  ACCESSTOKEN,
+  CURRENT_ID,
+  USER,
+  AUTH,
+  BASEURL
+} from "../const/base_const";
 import Dimensions from "Dimensions";
 import {
   StyleSheet,
   TouchableOpacity,
   Text,
   Animated,
-  AsyncStorage,
   Easing,
   Image,
-  Alert,
-  View
+  View,
+  AsyncStorage
 } from "react-native";
-import { SecureStore } from "expo";
-
 import spinner from "../images/loading.gif";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
-const DEVICE_HEIGHT = Dimensions.get("window").height;
 const MARGIN = 40;
 
 export default class ButtonSubmit extends Component {
@@ -38,31 +40,41 @@ export default class ButtonSubmit extends Component {
     const { email, password, username } = this.props;
 
     axios
-      .post("http://192.168.56.1:3000/user/", {
+      .post(BASEURL + USER, {
         username: username,
         password: password,
         email: email
       })
       .then(response => {
-        console.log(response);
-        SecureStore.setItemAsync("secure_token", response.data.token);
+        console.log(response.data);
+        this._storeData(ACCESSTOKEN, response.data.token);
+        this._storeData(CURRENT_ID, response.data.user._id);
       })
       .catch(error => {
         console.error("registerAction:", error);
       });
     console.log(username);
   }
+  _storeData = async (name, value) => {
+    try {
+      const taken = await AsyncStorage.setItem(name, value);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   _actionLogin() {
     const { email, password } = this.props;
 
     axios
-      .post("http://192.168.0.28:3000/auth/", {
+      .post(BASEURL + AUTH, {
         email: email,
         password: password
       })
       .then(response => {
-        SecureStore.setItemAsync("secure_token", response.data.token);
+        console.log(response.data);
+        this._storeData(ACCESSTOKEN, response.data.token);
+        this._storeData(CURRENT_ID, response.data.user._id);
       })
       .catch(error => {
         console.error("loginAction:", error);
@@ -85,7 +97,6 @@ export default class ButtonSubmit extends Component {
     }, 4000);
   }
   _navigateTo = () => {
-    console.log(this.props.username);
     if (this.props.username == null) this._actionLogin();
     else if (this.props.username != null) this._actionSignup();
     this.props.onPress();

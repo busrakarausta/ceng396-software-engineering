@@ -2,16 +2,7 @@ import React from "react";
 import { Text, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import TaskCard from "../components/TaskCard";
-import {
-  Content,
-  Card,
-  CardItem,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right
-} from "native-base";
+import { Icon } from "native-base";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 

@@ -24,16 +24,11 @@ import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
 
-const TabNavigation = createBottomTabNavigator(
-  {
-    Discover: DiscoverScreen,
-    Done: DoneScreen,
-    Doing: DoingScreen
-  },
-  {
-    tabBarComponent: props => <BottomBar {...props} />
-  }
-);
+const TabNavigation = createBottomTabNavigator({
+  Discover: DiscoverScreen,
+  Done: DoneScreen,
+  Doing: DoingScreen
+});
 const CustomDrawerComponent = props => (
   <SafeAreaView
     style={{
@@ -80,10 +75,10 @@ const ProjectNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
+  Login: LoginScreen,
   Home: HomeNavigator,
   Project: ProjectNavigator,
-  Signup: SignupScreen,
-  Login: LoginScreen
+  Signup: SignupScreen
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);

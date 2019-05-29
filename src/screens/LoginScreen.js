@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { AsyncStorage } from "react-native";
 import Logo from "../components/Logo";
 import LoginForm from "../components/LoginForm";
 import Wallpaper from "../components/Wallpaper";
 import ButtonSubmit from "../components/ButtonSubmit";
 import SignupSection from "../components/SignupSection";
-import Header from "../components/Header";
+import { ACCESSTOKEN } from "../const/base_const";
 
 export default class LoginScreen extends Component {
   constructor() {
@@ -14,10 +14,25 @@ export default class LoginScreen extends Component {
     this.handler_pass = this.handler_pass.bind(this);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      token: ""
     };
   }
+  /*_retrieveData = async name => {
+    try {
+      const value = await AsyncStorage.getItem(name);
 
+      this.setState({ token: value });
+      return value;
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  componentWillMount() {
+    this._retrieveData(ACCESSTOKEN);
+    console.log("token login", this.state.token);
+    if (this.state.token) this.props.navigation.navigate("Home");
+  }*/
   static navigationOptions = {
     header: null
   };
