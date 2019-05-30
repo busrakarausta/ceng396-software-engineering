@@ -38,8 +38,9 @@ export default class ProjectDetail extends Component {
     if (this.state.loading) {
       return <AppLoading />;
     }
+
     return (
-      <View style={{ flex: 1 }}>
+      <View>
         <Header
           style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
         >

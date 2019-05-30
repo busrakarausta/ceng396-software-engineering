@@ -8,7 +8,11 @@ import { Container, Header, Content, Button, ListItem, Text, Icon, Left, Body, R
     toggleSwitch = value => {
       this.setState({ switchValue: value });
     };
-
+    
+    static navigationOptions = {
+      header: null
+    };
+    
   render() {
     return (
       <Container>
