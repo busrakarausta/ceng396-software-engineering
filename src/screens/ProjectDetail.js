@@ -3,19 +3,22 @@ import {
   Dimensions,
   View,
   Image,
-  Text,
-  FlatList,
   TouchableOpacity
 } from "react-native";
-import { Button, Icon, Header, Body, Left } from "native-base";
+import { Button, Icon, Header, Body, Left,Container,
+  Card,
+  CardItem,
+  Content,
+  Text } from "native-base";
 import { Font, AppLoading } from "expo";
+import TaskScreen from "./TaskScreen";
 
 export default class ProjectDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      project: props.navigation.state.params.project
+      project: props.navigation.state.params.project,
     };
   }
   async componentDidMount() {
@@ -40,14 +43,14 @@ export default class ProjectDetail extends Component {
     }
 
     return (
-      <View>
+      <Container>
         <Header
           style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
         >
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("Discover")}
+              onPress={() => this.props.navigation.navigate("CreateTask")}
             >
               <Icon name="md-arrow-back" />
             </Button>
@@ -56,10 +59,26 @@ export default class ProjectDetail extends Component {
             <Text style={{ color: "white", fontWeight: "bold" }}>DETAILS</Text>
           </Body>
         </Header>
-        <View style={{ flex: 1 }}>
-          <Text>{this.state.project.desc}</Text>
-          <Text>{this.state.project.name}</Text>
-        </View>
+
+
+
+
+        <Content>
+          <Card>
+            <CardItem header bordered>
+              <Text style={{ color: "#565656" }}> {this.state.project.name}</Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text>{this.state.project.desc}</Text>
+              </Body>
+            </CardItem>
+
+          </Card>
+        </Content>
+       
+       <TaskScreen style={{marginTop:15}} />
+
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
           <TouchableOpacity
             onPress={() =>
@@ -71,7 +90,9 @@ export default class ProjectDetail extends Component {
             <Image source={require("../images/addIcon.png")} />
           </TouchableOpacity>
         </View>
-      </View>
+        </Container>
     );
   }
 }
+
+
