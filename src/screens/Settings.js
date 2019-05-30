@@ -13,6 +13,7 @@ import { Container, Header, Content, Button, ListItem, Text, Icon, Left, Body, R
       header: null
     };
     
+    
   render() {
     return (
       <Container>
@@ -63,7 +64,9 @@ import { Container, Header, Content, Button, ListItem, Text, Icon, Left, Body, R
             </Left>
             <Body>
                 <TouchableOpacity 
+                  
                     onPress={() => this.props.navigation.navigate("LoginScreen")}
+                    
                 >
                      <Text style={{fontSize:20}}>Log Out</Text>
               </TouchableOpacity>

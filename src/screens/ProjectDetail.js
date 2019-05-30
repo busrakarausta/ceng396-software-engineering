@@ -105,7 +105,7 @@ export default class ProjectDetail extends Component {
         />
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
-          {this.state.status == 1 ? (
+          
             <TouchableOpacity
               onPress={() =>
                 this.props.navigation.navigate("CreateTask", {
@@ -115,7 +115,7 @@ export default class ProjectDetail extends Component {
             >
               <Image source={require("../images/addIcon.png")} />
             </TouchableOpacity>
-          ) : null}
+         
         </View>
       </Container>
     );
