@@ -56,7 +56,11 @@ export default class DoingScreen extends Component {
           data={this.state.projects}
           renderItem={({ item }) => (
             <Card
-              // onPress={() => }
+              onPress={() =>
+                this.props.navigation.navigate("ProjectDetail", {
+                  project: item
+                })
+              }
               title={item.name}
             >
               <Timestamp

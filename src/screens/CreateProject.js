@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Dimensions, ScrollView, View } from "react-native";
-
+import { Dimensions, ScrollView, View, AsyncStorage } from "react-native";
+import axios from "axios";
 import {
   Button,
   Container,
@@ -17,32 +17,94 @@ import {
   Icon
 } from "native-base";
 import { Font, AppLoading } from "expo";
+import { BASEURL, PROJECT, CURRENT_ID, ACCESSTOKEN } from "../const/base_const";
 
 export default class CreateProject extends Component {
   constructor(props) {
     super(props);
-    this.state = { chosenDate: new Date(), loading: true };
     this.setDate = this.setDate.bind(this);
     this.state = {
+      token: "",
+      current_id: "",
       pname: "",
       description: "",
-      links: ""
+      links: "",
+      chosenDate: new Date(),
+      loading: true,
+      managers: [],
+      participants: []
     };
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
+  create() {
+    const {
+      pname,
+      description,
+      chosenDate,
+      token,
+      current_id,
+      participants,
+      managers
+    } = this.state;
 
+    axios
+      .post(
+        BASEURL + PROJECT,
+        {
+          name: pname,
+          creater: current_id,
+          desc: description,
+          status: 0,
+          participant: participants,
+          tasks: [],
+          managers: managers,
+          like: [],
+          comment: [],
+          dueDate: chosenDate,
+          startDate: chosenDate
+        },
+        {
+          headers: { Authorization: token }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        this.props.navigation.navigate("ProjectDetail", {
+          project: response.data
+        });
+      })
+      .catch(error => {
+        console.error("Creation Error:", error);
+      });
+  }
   static navigationOptions = {
     header: null
   };
-  async componentDidMount() {
+  _retrieveData = async name => {
+    try {
+      const value = await AsyncStorage.getItem(name);
+      if (name == ACCESSTOKEN) this.setState({ token: value });
+      else this.setState({ current_id: value });
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  _getProjects = async () => {
+    try {
+      await this._retrieveData(ACCESSTOKEN);
+      await this._retrieveData(CURRENT_ID);
+    } catch (error) {}
+  };
+  async componentWillMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
     this.setState({ loading: false });
+    this._getProjects();
   }
 
   render() {
@@ -84,7 +146,7 @@ export default class CreateProject extends Component {
                 <CardItem>
                   <Body>
                     <Item floatingLabel>
-                      <Input onChangeText={pname => this.props.pname(pname)} />
+                      <Input onChangeText={pname => this.setState({ pname })} />
                     </Item>
                   </Body>
                 </CardItem>
@@ -105,7 +167,7 @@ export default class CreateProject extends Component {
                         maxHeight={150}
                         multiline={true}
                         onChangeText={description =>
-                          this.props.description(description)
+                          this.setState({ description })
                         }
                       />
                     </Item>
@@ -149,7 +211,7 @@ export default class CreateProject extends Component {
                       <Input
                         maxHeight={120}
                         multiline={true}
-                        onChangeText={links => this.props.links(links)}
+                        onChangeText={links => this.setState({ links })}
                       />
                     </Item>
                   </Body>
@@ -160,7 +222,7 @@ export default class CreateProject extends Component {
                 style={{ backgroundColor: "orange", marginTop: 10 }}
                 block
                 success
-                onPress={() => this.props.navigation.navigate("CreateTask")}
+                onPress={() => this.create()}
               >
                 <Text>Add Project</Text>
               </Button>
@@ -171,11 +233,3 @@ export default class CreateProject extends Component {
     );
   }
 }
-
-/*
-date picker current selected date.
- <Text style={{ textAlign: "center"}}>
-              Project Due Date: {this.state.chosenDate.toString().substr(4, 12)}
-            </Text>
-
-*/
