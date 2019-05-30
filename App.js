@@ -25,12 +25,18 @@ import Settings from "./src/screens/Settings";
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
+<<<<<<< HEAD
     Doing: DoingScreen,
     Done: DoneScreen
   } /*,
+=======
+    Done: DoneScreen,
+    Doing: DoingScreen
+  },
+>>>>>>> 365e3dbad2cb73ec9abf36fa660b094a8c43ea78
   {
     tabBarComponent: props => <BottomBar {...props} />
-  }*/
+  }
 );
 const CustomDrawerComponent = props => (
   <SafeAreaView
