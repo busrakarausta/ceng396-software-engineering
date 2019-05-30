@@ -31,10 +31,10 @@ const TabNavigation = createBottomTabNavigator(
     Discover: DiscoverScreen,
     Done: DoneScreen,
     Doing: DoingScreen
-  }
-  /*{
+  },
+  {
     tabBarComponent: props => <BottomBar {...props} />
-  }*/
+  }
 );
 const CustomDrawerComponent = props => (
   <SafeAreaView

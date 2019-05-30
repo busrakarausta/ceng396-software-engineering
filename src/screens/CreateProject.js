@@ -17,7 +17,13 @@ import {
   Icon
 } from "native-base";
 import { Font, AppLoading } from "expo";
-import { BASEURL, PROJECT, CURRENT_ID, ACCESSTOKEN, USER } from "../const/base_const";
+import {
+  BASEURL,
+  PROJECT,
+  CURRENT_ID,
+  ACCESSTOKEN,
+  USER
+} from "../const/base_const";
 
 export default class CreateProject extends Component {
   constructor(props) {
@@ -33,7 +39,7 @@ export default class CreateProject extends Component {
       loading: true,
       managers: [],
       participants: [],
-      username:""
+      username: ""
     };
   }
   setDate(newDate) {
@@ -81,36 +87,31 @@ export default class CreateProject extends Component {
       });
   }
 
-
-  
   findMember(type) {
-
     axios
-      .get(
-        BASEURL + USER + this.state.username,
-        {
-          headers: { Authorization: this.state.token }
-        }
-      )
+      .get(BASEURL + USER + this.state.username, {
+        headers: { Authorization: this.state.token }
+      })
       .then(response => {
         console.log(response.data);
-        if(type=="participant")
-             this.setState({participants:[...this.state.participants,response.data]});
-        else if(type=="manager")
-             this.setState({managers:[...this.state.managers, {m_id:response.data}]});
-
-
-
+        if (type == "participant") {
+          this.setState({
+            participants: [
+              ...this.state.participants,
+              { p_id: response.data.user._id }
+            ]
+          });
+          console.log(this.state.participants);
+        } else if (type == "manager")
+          this.setState({
+            managers: [...this.state.managers, { m_id: response.data.user._id }]
+          });
       })
       .catch(error => {
         console.error("Find Error:", error);
       });
   }
 
-
-
-
-  
   static navigationOptions = {
     header: null
   };
@@ -164,10 +165,8 @@ export default class CreateProject extends Component {
             </Text>
           </Body>
         </Header>
-
-        
-          <Container>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
+        <Container>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Content>
               <Card style={{ borderWidth: 2 }}>
                 <CardItem header bordered>
@@ -184,7 +183,6 @@ export default class CreateProject extends Component {
                   </Body>
                 </CardItem>
               </Card>
-
               <Card style={{ borderWidth: 2 }}>
                 <CardItem header bordered>
                   <Icon name="md-create" />
@@ -192,7 +190,6 @@ export default class CreateProject extends Component {
                     Project Description
                   </Text>
                 </CardItem>
-
                 <CardItem>
                   <Body>
                     <Item floatingLabel>
@@ -207,7 +204,6 @@ export default class CreateProject extends Component {
                   </Body>
                 </CardItem>
               </Card>
-
               <Card style={{ borderWidth: 2 }}>
                 <CardItem header bordered>
                   <Icon name="md-calendar" />
@@ -215,7 +211,6 @@ export default class CreateProject extends Component {
                     Project Due Date
                   </Text>
                 </CardItem>
-
                 <DatePicker
                   defaultDate={new Date(2019, 5, 31)}
                   minimumDate={new Date(2018, 1, 1)}
@@ -232,7 +227,6 @@ export default class CreateProject extends Component {
                   disabled={false}
                 />
               </Card>
-
               <Card style={{ borderWidth: 2 }}>
                 <CardItem header bordered>
                   <Icon name="md-link" />
@@ -250,76 +244,71 @@ export default class CreateProject extends Component {
                   </Body>
                 </CardItem>
               </Card>
-
-
-
-            <View style={{flexDirection:"row",flex:1}}>
-              <Card style={{ borderWidth: 2 , flex:1}}>
-                <CardItem header bordered>
-                  
-                  <Text style={{ color: "#333333", fontSize: 12 }}>Participant Username</Text>
-                </CardItem>
-                <CardItem>
-                  <Body>
-                    <Item floatingLabel>
-                      <Input  
-                        multiline={true}                                          
-                        onChangeText={username => this.setState({ username })}
-                      />
-                    </Item>
-                  </Body>
-                </CardItem>
-              </Card>
-              
-              <Card style={{ borderWidth: 2, flex:1 }}>
-                <CardItem header bordered>
-                 
-                  <Text style={{ color: "#333333", fontSize: 12 }}>Manager Username</Text>
-                </CardItem>
-                <CardItem>
-                  <Body>
-                    <Item floatingLabel>
-                      <Input 
-                        multiline={true}                               
-                        onChangeText={username => this.setState({ username })}
-                      />
-                    </Item>
-                  </Body>
-                </CardItem>
-              </Card>
-
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <Card style={{ borderWidth: 2, flex: 1 }}>
+                  <CardItem header bordered>
+                    <Text style={{ color: "#333333", fontSize: 12 }}>
+                      Participant Username
+                    </Text>
+                  </CardItem>
+                  <CardItem>
+                    <Body>
+                      <Item floatingLabel>
+                        <Input
+                          multiline={true}
+                          onChangeText={username => this.setState({ username })}
+                        />
+                      </Item>
+                    </Body>
+                  </CardItem>
+                </Card>
+                <Card style={{ borderWidth: 2, flex: 1 }}>
+                  <CardItem header bordered>
+                    <Text style={{ color: "#333333", fontSize: 12 }}>
+                      Manager Username
+                    </Text>
+                  </CardItem>
+                  <CardItem>
+                    <Body>
+                      <Item floatingLabel>
+                        <Input
+                          multiline={true}
+                          onChangeText={username => this.setState({ username })}
+                        />
+                      </Item>
+                    </Body>
+                  </CardItem>
+                </Card>
               </View>
-              
-
-           <View style={{flexDirection:"row", flex:1}}>
-            
-              
-              <Button bordered warning style={{flex:1}}
-                   onPress={() => this.findMember("participant")}>
-                <Text style={{textAlign:"center"}}>Add Participant</Text>
-              </Button>
-          
-
-              <Button bordered warning style={{flex:1}}
-                   onPress={() => this.findMember("manager")}>
-                <Text  style={{textAlign:"center"}}>Add Manager</Text>
-              </Button>
-          
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <Button
+                  bordered
+                  warning
+                  style={{ flex: 1 }}
+                  onPress={() => this.findMember("participant")}
+                >
+                  <Text style={{ textAlign: "center" }}>Add Participant</Text>
+                </Button>
+                <Button
+                  bordered
+                  warning
+                  style={{ flex: 1 }}
+                  onPress={() => this.findMember("manager")}
+                >
+                  <Text style={{ textAlign: "center" }}>Add Manager</Text>
+                </Button>
               </View>
-
-
               <Button
                 style={{ backgroundColor: "orange", marginTop: 10 }}
                 block
                 success
                 onPress={() => this.create()}
               >
-                <Text style={{textAlign:"center"}}>Add Project</Text>
+                <Text style={{ textAlign: "center" }}>Add Project</Text>
               </Button>
             </Content>
-            </ScrollView>
-          </Container>
-        
+          </ScrollView>
+        </Container>
       </View>
     );
   }

@@ -14,7 +14,7 @@ export default class TaskDetail extends React.Component {
   render() {
     return (
       <Modal
-        isVisible={true} //{this.props.isVisible}
+        isVisible={true}
         hasBackdrop={true}
         onBackdropPress={this.props.onBackdropPress}
         style={{
@@ -22,7 +22,6 @@ export default class TaskDetail extends React.Component {
           marginTop: 20,
           position: "absolute",
           padding: 20,
-          //  backgroundColor: "rgba(255,255,255,0.8)",
           alignSelf: "center",
           width: width / 1.5,
           height: height / 1.5,
