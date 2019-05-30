@@ -6,12 +6,10 @@ import { systemWeights } from "react-native-typography";
 import bgSrc from "../images/pp.jpg";
 
 export default class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
-  componentDidMount() {
-    console.log(this.props.scene.descriptor.options);
-  }
+
   render() {
     return (
       <View
@@ -28,19 +26,18 @@ export default class Header extends Component {
             android: { elevation: 1 }
           }),
           width: "100%",
-          height: "22%",
+          height: "18%",
           justifyContent: "space-between"
         }}
       >
         <View
           style={{
-            marginTop: 20,
+            marginTop: 10,
             padding: 5,
             flexDirection: "row",
-            justifyContent: "space-between"
+            justifyContent: "flex-end"
           }}
         >
-          <Ionicons name="ios-menu" size={32} color="black" />
           <Image
             source={bgSrc}
             style={{
@@ -61,7 +58,7 @@ export default class Header extends Component {
             fontSize: 40
           }}
         >
-          {this.props.scene.descriptor.options.title}
+          Discover
         </Text>
       </View>
     );

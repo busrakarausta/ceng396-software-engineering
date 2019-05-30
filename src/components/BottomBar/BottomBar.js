@@ -6,25 +6,19 @@ import StaticBar from "./StaticBar";
 export default class BottomBar extends Component {
   render() {
     return (
-      <StaticBar>
-        <TabBar.Item
+      <StaticBar navigation={this.props.navigation}>
+        <StaticBar.Item
           selectedIcon={require("../../images/add.png")}
           title="Doing"
-        >
-          <View>{/*Page Content*/}</View>
-        </TabBar.Item>
-        <TabBar.Item
+        />
+        <StaticBar.Item
           selectedIcon={require("../../images/add.png")}
           title="Discover"
-        >
-          <View>{/*Page Content*/}</View>
-        </TabBar.Item>
-        <TabBar.Item
+        />
+        <StaticBar.Item
           selectedIcon={require("../../images/add.png")}
           title="Done"
-        >
-          <View>{/*Page Content*/}</View>
-        </TabBar.Item>
+        />
       </StaticBar>
     );
   }

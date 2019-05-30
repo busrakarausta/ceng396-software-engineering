@@ -54,7 +54,6 @@ const HomeNavigator = createStackNavigator(
 const WelcomeNavigator = createStackNavigator({
   TaskDetail: TaskDetail,
   TaskScreen: TaskScreen,
-  TaskScreen: TaskScreen,
   ProjectDetail: ProjectDetail,
   CreateProject: CreateProject,
   DoneScreen: DoneScreen,

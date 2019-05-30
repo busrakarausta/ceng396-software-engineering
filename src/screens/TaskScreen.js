@@ -13,7 +13,6 @@ import {
 import ToDoScreen from "./ToDoScreen";
 import InProgressScreen from "./InProgressScreen";
 import CompletedScreen from "./CompletedScreen";
-import { withTheme } from "react-native-elements";
 export default class TaskScreen extends Component {
   static navigationOptions = {
     header: null
@@ -21,20 +20,20 @@ export default class TaskScreen extends Component {
   render() {
     return (
       <Container>
-        <Header style={{backgroundColor:"orange"}}>
+        <Header style={{ backgroundColor: "orange" }}>
           <Left>
-            <Button transparent 
-                onPress={() => this.props.navigation.navigate("ProjectDetail")}
-
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("ProjectDetail")}
             >
               <Icon name="md-arrow-round-back" />
             </Button>
           </Left>
 
           <Right>
-            <Button transparent
-                onPress={() => this.props.navigation.navigate("Discover")}
-
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Discover")}
             >
               <Icon name="home" />
             </Button>
