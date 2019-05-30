@@ -63,7 +63,14 @@ export default class CompletedScreen extends Component {
               onRefresh={this._getProjects.bind(this)}
             />
           }
-          renderItem={({ item }) => <TaskCard item={item} />}
+          renderItem={({ item }) => (
+            <TaskCard
+              onPress={() =>
+                this.props.navigation.navigate("TaskDetail", { task: item })
+              }
+              item={item}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
         />

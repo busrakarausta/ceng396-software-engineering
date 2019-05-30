@@ -65,7 +65,13 @@ export default class ToDoScreen extends Component {
             />
           }
           renderItem={({ item }) => (
-            <TaskCard item={item} option="In Progress" />
+            <TaskCard
+              item={item}
+              onPress={() =>
+                this.props.navigation.navigate("TaskDetail", { task: item })
+              }
+              option="In Progress"
+            />
           )}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}

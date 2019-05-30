@@ -14,6 +14,7 @@ import {
   Text
 } from "native-base";
 import { Font, AppLoading } from "expo";
+import { MaterialIcons } from "@expo/vector-icons";
 import TaskScreen from "./TaskScreen";
 import SubMenuProject from "../components/SubMenuProject";
 
@@ -72,6 +73,17 @@ export default class ProjectDetail extends Component {
                 status={this.state.project.status}
               />
             </Body>
+            <Body>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("EditProject", {
+                    project: this.state.project
+                  })
+                }
+              >
+                <MaterialIcons name="edit" size={25} />
+              </TouchableOpacity>
+            </Body>
           </Right>
         </Header>
 
@@ -104,9 +116,8 @@ export default class ProjectDetail extends Component {
           style={{ marginTop: 15 }}
           projectId={this.state.project._id}
         />
-
-        <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
-          
+        {this.state.project.status === 1 ? (
+          <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
             <TouchableOpacity
               onPress={() =>
                 this.props.navigation.navigate("CreateTask", {
@@ -116,8 +127,8 @@ export default class ProjectDetail extends Component {
             >
               <Image source={require("../images/addIcon.png")} />
             </TouchableOpacity>
-         
-        </View>
+          </View>
+        ) : null}
       </Container>
     );
   }

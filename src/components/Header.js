@@ -38,7 +38,7 @@ export default class Header extends Component {
             justifyContent: "space-between"
           }}
         >
-          <TouchableOpacity onPress={() => this.props.navigation.drawerOpen()}>
+          <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
             <MaterialIcons name="menu" size={30} />
           </TouchableOpacity>
           <TouchableOpacity

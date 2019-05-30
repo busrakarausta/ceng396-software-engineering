@@ -21,22 +21,17 @@ import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
 import UserProfile from "./src/screens/UserProfile";
 import Settings from "./src/screens/Settings";
+import EditProject from "./src/screens/EditProject";
 
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
-<<<<<<< HEAD
     Doing: DoingScreen,
     Done: DoneScreen
   } /*,
-=======
-    Done: DoneScreen,
-    Doing: DoingScreen
-  },
->>>>>>> 365e3dbad2cb73ec9abf36fa660b094a8c43ea78
   {
     tabBarComponent: props => <BottomBar {...props} />
-  }
+  }*/
 );
 const CustomDrawerComponent = props => (
   <SafeAreaView
@@ -67,11 +62,12 @@ const HomeNavigator = createDrawerNavigator(
 
 const ProjectNavigator = createStackNavigator(
   {
-    TaskDetail: TaskDetail,
     TaskScreen: TaskScreen,
     ProjectDetail: ProjectDetail,
+    TaskDetail: TaskDetail,
     CreateProject: CreateProject,
-    CreateTask: CreateTask
+    CreateTask: CreateTask,
+    EditProject: EditProject
   },
   {
     navigationOptions: {

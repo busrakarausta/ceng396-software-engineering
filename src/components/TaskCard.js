@@ -32,7 +32,10 @@ export default class TaskCard extends Component {
       return <AppLoading />;
     }
     return (
-      <Content style={{ width: "85%", alignSelf: "center" }}>
+      <Content
+        onPress={this.props.onPress}
+        style={{ width: "85%", alignSelf: "center" }}
+      >
         <Card
           style={{
             alignItems: "center"

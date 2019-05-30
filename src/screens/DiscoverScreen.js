@@ -28,7 +28,7 @@ export default class DiscoverScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header title="Discover" navigation={() => this.props.navigation} />
+        <Header title="Discover" navigation={this.props.navigation} />
         <FlatList
           data={sources}
           renderItem={({ item }) => <NotifCard src={item.pp} text={item.txt} />}

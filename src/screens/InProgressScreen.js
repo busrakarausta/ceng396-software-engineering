@@ -64,7 +64,15 @@ export default class InProgressScreen extends Component {
               onRefresh={this._getProjects.bind(this)}
             />
           }
-          renderItem={({ item }) => <TaskCard option="Done" item={item} />}
+          renderItem={({ item }) => (
+            <TaskCard
+              onPress={() =>
+                this.props.navigation.navigate("TaskDetail", { task: item })
+              }
+              option="Done"
+              item={item}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
         />
