@@ -12,7 +12,6 @@ import {
   Body,
   Right
 } from "native-base";
-import NotifCard from "../components/NotifCard";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 

@@ -22,6 +22,11 @@ import CompletedScreen from "./src/screens/CompletedScreen";
 import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
+<<<<<<< HEAD
+=======
+import UserProfile from "./src/screens/UserProfile";
+import Settings from "./src/screens/Settings";
+>>>>>>> 6245366655fcdfc98f47dec4649616b72e9d58ef
 
 const TabNavigation = createBottomTabNavigator(
   {
@@ -44,6 +49,32 @@ const HomeNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
+<<<<<<< HEAD
+=======
+    contentComponent: CustomDrawerComponent,
+    navigationOptions: {
+      title: "Discover",
+      header: props => (
+        <Header
+          {...props}
+          openDrawer={() => this.props.navigation.openDrawer()}
+        />
+      )
+    }
+  }
+);
+
+const ProjectNavigator = createStackNavigator(
+  {
+    Settings: Settings,
+    UserProfile: UserProfile,
+    TaskScreen: TaskScreen,
+    ProjectDetail: ProjectDetail,
+    CreateProject: CreateProject,
+    CreateTask: CreateTask
+  },
+  {
+>>>>>>> 6245366655fcdfc98f47dec4649616b72e9d58ef
     navigationOptions: {
       title: "Discover  ",
       header: (navigation, props) => <Header {...props} {...navigation} />
@@ -52,6 +83,7 @@ const HomeNavigator = createStackNavigator(
 );
 
 const WelcomeNavigator = createStackNavigator({
+<<<<<<< HEAD
   TaskDetail: TaskDetail,
   TaskScreen: TaskScreen,
   ProjectDetail: ProjectDetail,
@@ -62,6 +94,12 @@ const WelcomeNavigator = createStackNavigator({
   Home: HomeNavigator,
   Signup: SignupScreen,
   Login: LoginScreen
+=======
+  Login: LoginScreen,
+  Home: HomeNavigator,
+  Project: ProjectNavigator,
+  Signup: SignupScreen
+>>>>>>> 6245366655fcdfc98f47dec4649616b72e9d58ef
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);

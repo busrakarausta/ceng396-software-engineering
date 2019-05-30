@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, TouchableHighlight, Image } from "react-native";
+import { View, Text, Platform, TouchableHighlight, Image } from "react-native";
 
 export default class Card extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const {
       title,
@@ -17,12 +21,12 @@ export default class Card extends Component {
     return (
       <TouchableHighlight
         style={[styles.containerStyle, { borderColor: bordercolor }]}
-        //onPress={onPress}
+        onPress={onPress}
       >
         <View style={styles.innerContainer}>
           <View style={{ justifyContent: "space-between" }}>
             <Image
-              style={{ width: 50, height: 80 }}
+              style={{ width: 30, height: 30, borderRadius: 20 }}
               source={{
                 uri:
                   "http://www.soidergi.com/wp-content/uploads/pn/png-cartoon-person-illustration-vector-cartoon-materia.jpg"
@@ -64,15 +68,15 @@ const styles = {
     marginTop: 20,
     marginLeft: 15,
     marginRight: 15,
-    shadowOffset: {
-      width: 5,
-      height: 1,
-      elevation: 5
-    },
-    shadowRadius: 5,
-    shadowOpacity: 0.7,
-    shadowColor: "#fffbf7",
-    elevation: 3
+    ...Platform.select({
+      ios: {
+        shadowRadius: 2,
+        shadowOpacity: 0.7,
+        shadowColor: "rgba(247, 231, 215,0.9)",
+        shadowOffset: { width: 2, height: 1 }
+      },
+      android: { elevation: 1 }
+    })
   },
   innerContainer: {
     alignItem: "stretch",

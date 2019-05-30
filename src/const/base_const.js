@@ -1,12 +1,13 @@
 export const ACCESSTOKEN = "ACCESS_TOKEN";
-export const BASEURL = "http://178.251.45.190:8050/api/";
+export const BASEURL = "http://192.168.56.1:3000/";
+export const AUTH = "auth/";
+export const PROJECT = "project/";
+export const TASK = "task/";
+export const USER = "user/";
 export const CURRENT_USER = "me";
 export const CURRENT_ID = "currentId";
 export const STATUS = "status";
 export const LOOKUP = "lookup/status";
-export const AUTH = "auth";
 export const TYPES = "lookup/type";
-export const REPORTS = "reports";
-export const USERS = "users/";
 export const ALERT_ERROR = "Something went wrong";
 export const MISSED_REQUIRED = "Zorunlu alanları doldurunuz!";
