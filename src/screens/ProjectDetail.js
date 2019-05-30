@@ -19,6 +19,8 @@ export default class ProjectDetail extends Component {
     this.state = {
       loading: true,
       project: props.navigation.state.params.project,
+      status: props.navigation.state.params.project.status     
+
     };
   }
   async componentDidMount() {
@@ -77,10 +79,10 @@ export default class ProjectDetail extends Component {
           </Card>
         </Content>
        
-       <TaskScreen style={{marginTop:15}} />
-
+         <TaskScreen  />
+   
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
-          <TouchableOpacity
+            {this.state.status == 1  ? <TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("CreateTask", {
                 project_id: this.state.project._id
@@ -88,8 +90,13 @@ export default class ProjectDetail extends Component {
             }
           >
             <Image source={require("../images/addIcon.png")} />
-          </TouchableOpacity>
+          </TouchableOpacity>   
+           : null}
+
+                 
         </View>
+
+
         </Container>
     );
   }
