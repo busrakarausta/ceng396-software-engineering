@@ -2,52 +2,49 @@ import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
 import TaskCard from "../components/TaskCard";
 
-const sources = [
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Büşra Karausta deleted Management task of Github Project."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Büşra Karausta deleted Management task of Github Project."
-  }
-];
 export default class CompletedScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { tasks: [], token: "", status: 3 };
+  }
+
+  componentWillMount() {
+    this._getProjects();
+  }
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem(ACCESSTOKEN);
+
+      this.setState({ token: value });
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  _getProjects = async () => {
+    try {
+      await this._retrieveData();
+    } catch (error) {}
+    if (this.state.token) {
+      axios
+        .get(BASEURL + TASK + this.props.project_id + "/" + this.state.status, {
+          headers: { Authorization: this.state.token }
+        })
+        .then(response => {
+          this.setState({ tasks: response.data });
+          console.log(this.state.tasks);
+        })
+        .catch(error => {
+          console.error("ProjectAction:", error);
+        });
+    } else console.log("state is empty");
+  };
   render() {
     return (
       <View style={{ flex: 1, marginTop: 10 }}>
         <FlatList
-          data={sources}
-          renderItem={({ item }) => (
-            <TaskCard desc={item.desc} name={item.name} />
-          )}
+          data={this.state.tasks}
+          renderItem={({ item }) => <TaskCard item={item} />}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
         />

@@ -42,13 +42,13 @@ export default class TaskScreen extends Component {
 
         <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="To Do">
-            <ToDoScreen />
+            <ToDoScreen projectID={this.props.projectId} />
           </Tab>
           <Tab heading="In Progress">
-            <InProgressScreen />
+            <InProgressScreen projectID={this.props.projectId} />
           </Tab>
           <Tab heading="Completed">
-            <CompletedScreen />
+            <CompletedScreen projectID={this.props.projectId} />
           </Tab>
         </Tabs>
       </Container>
