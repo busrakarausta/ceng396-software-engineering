@@ -10,16 +10,12 @@ import {
   createDrawerNavigator
 } from "react-navigation";
 import DiscoverScreen from "./src/screens/DiscoverScreen";
-import Header from "./src/components/Header";
 import DoneScreen from "./src/screens/DoneScreen";
 import DoingScreen from "./src/screens/DoingScreen";
 import BottomBar from "./src/components/BottomBar/BottomBar";
-import ToDoScreen from "./src/screens/ToDoScreen";
-import InProgressScreen from "./src/screens/InProgressScreen";
 import TaskScreen from "./src/screens/TaskScreen";
 import CreateTask from "./src/screens/CreateTask";
 import CreateProject from "./src/screens/CreateProject";
-import CompletedScreen from "./src/screens/CompletedScreen";
 import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
@@ -29,9 +25,9 @@ import Settings from "./src/screens/Settings";
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
-    Done: DoneScreen,
-    Doing: DoingScreen
-  }/*,
+    Doing: DoingScreen,
+    Done: DoneScreen
+  } /*,
   {
     tabBarComponent: props => <BottomBar {...props} />
   }*/
@@ -50,28 +46,22 @@ const CustomDrawerComponent = props => (
 
 const HomeNavigator = createDrawerNavigator(
   {
-    Home: TabNavigation
+    Home: TabNavigation,
+    Settings: Settings,
+    Profile: UserProfile
   },
   {
     headerMode: "none",
-    contentComponent: CustomDrawerComponent,
     navigationOptions: {
-      title: "Discover",
-      header: props => (
-        <Header
-          {...props}
-          openDrawer={() => this.props.navigation.openDrawer()}
-        />
-      )
-    }
+      header: null
+    },
+    contentComponent: CustomDrawerComponent
   }
 );
 
 const ProjectNavigator = createStackNavigator(
   {
-    Settings: Settings,
     TaskDetail: TaskDetail,
-    UserProfile: UserProfile,
     TaskScreen: TaskScreen,
     ProjectDetail: ProjectDetail,
     CreateProject: CreateProject,
@@ -86,9 +76,9 @@ const ProjectNavigator = createStackNavigator(
 
 const WelcomeNavigator = createStackNavigator({
   Login: LoginScreen,
+  Signup: SignupScreen,
   Home: HomeNavigator,
-  Project: ProjectNavigator,
-  Signup: SignupScreen
+  Project: ProjectNavigator
 });
 
 const AppContainer = createAppContainer(WelcomeNavigator);

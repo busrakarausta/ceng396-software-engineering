@@ -67,6 +67,7 @@ export default class ProjectDetail extends Component {
           <Right>
             <Body>
               <SubMenuProject
+                navigation={() => this.props.navigation}
                 id={this.state.project._id}
                 status={this.state.project.status}
               />
@@ -91,7 +92,7 @@ export default class ProjectDetail extends Component {
                 <Text style={{ color: "#565656", fontWeight: "bold" }}>
                   Deadline:
                   <Text style={{ color: "red", fontWeight: "normal" }}>
-                    {this.state.project.dueDate}
+                    {this.state.project.dueDate.toString().substr(4, 12)}
                   </Text>
                 </Text>
               </Body>

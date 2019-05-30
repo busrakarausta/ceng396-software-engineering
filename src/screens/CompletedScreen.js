@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, AsyncStorage } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  AsyncStorage,
+  RefreshControl
+} from "react-native";
 import TaskCard from "../components/TaskCard";
 import axios from "axios";
 import { ACCESSTOKEN, BASEURL, TASK } from "../const/base_const";
@@ -50,6 +56,13 @@ export default class CompletedScreen extends Component {
       <View style={{ flex: 1, marginTop: 10 }}>
         <FlatList
           data={this.state.tasks}
+          refreshControl={
+            <RefreshControl
+              colors={["#9Bd35A", "#689F38"]}
+              refreshing={this.props.refreshing}
+              onRefresh={this._getProjects.bind(this)}
+            />
+          }
           renderItem={({ item }) => <TaskCard item={item} />}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}

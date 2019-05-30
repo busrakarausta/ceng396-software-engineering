@@ -22,6 +22,7 @@ export default class Card extends Component {
       <TouchableHighlight
         style={[styles.containerStyle, { borderColor: bordercolor }]}
         onPress={onPress}
+        underlayColor={"transparent"}
       >
         <View style={styles.innerContainer}>
           <View style={{ justifyContent: "space-between" }}>

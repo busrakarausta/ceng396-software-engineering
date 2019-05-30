@@ -12,6 +12,7 @@ import { PROJECT, DELETE, BASEURL, TASK } from "../const/base_const";
 export default class SubMenuProject extends Component {
   constructor(props) {
     super(props);
+    this.changeProgress = this.changeProgress.bind(this);
     this.state = { status: 1, token: "", option: "" };
   }
 
@@ -35,6 +36,8 @@ export default class SubMenuProject extends Component {
           )
           .then(response => {
             console.log(response.data.message);
+            alert(response.data.message);
+            this.props.navigation.goBack();
           })
           .catch(error => {
             console.error("Delete Error:", error);
@@ -45,13 +48,11 @@ export default class SubMenuProject extends Component {
       });
   }
   changeProgress() {
-    this.setState({ status: this.state.status + 1 });
-    console.log(this.state.status);
     axios
       .put(
         BASEURL + PROJECT + this.props.id,
         {
-          status: this.state.status
+          status: 2
         },
         {
           headers: { Authorization: this.state.token }
