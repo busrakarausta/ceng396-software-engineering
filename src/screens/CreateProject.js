@@ -17,7 +17,7 @@ import {
   Icon
 } from "native-base";
 import { Font, AppLoading } from "expo";
-import { BASEURL, PROJECT, CURRENT_ID, ACCESSTOKEN } from "../const/base_const";
+import { BASEURL, PROJECT, CURRENT_ID, ACCESSTOKEN, USER } from "../const/base_const";
 
 export default class CreateProject extends Component {
   constructor(props) {
@@ -32,7 +32,8 @@ export default class CreateProject extends Component {
       chosenDate: new Date(),
       loading: true,
       managers: [],
-      participants: []
+      participants: [],
+      username:""
     };
   }
   setDate(newDate) {
@@ -79,6 +80,37 @@ export default class CreateProject extends Component {
         console.error("Creation Error:", error);
       });
   }
+
+
+  
+  findMember(type) {
+
+    axios
+      .get(
+        BASEURL + USER + this.state.username,
+        {
+          headers: { Authorization: this.state.token }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        if(type=="participant")
+             this.setState({participants:[...this.state.participants,response.data]});
+        else if(type=="manager")
+             this.setState({managers:[...this.state.managers, {m_id:response.data}]});
+
+
+
+      })
+      .catch(error => {
+        console.error("Find Error:", error);
+      });
+  }
+
+
+
+
+  
   static navigationOptions = {
     header: null
   };
@@ -121,7 +153,7 @@ export default class CreateProject extends Component {
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("TasksScreen")}
+              onPress={() => this.props.navigation.navigate("Discover")}
             >
               <Icon name="md-arrow-back" />
             </Button>
@@ -133,8 +165,9 @@ export default class CreateProject extends Component {
           </Body>
         </Header>
 
-        <ScrollView style={{ flex: 1 }}>
+        
           <Container>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
             <Content>
               <Card style={{ borderWidth: 2 }}>
                 <CardItem header bordered>
@@ -209,7 +242,7 @@ export default class CreateProject extends Component {
                   <Body>
                     <Item floatingLabel>
                       <Input
-                        maxHeight={120}
+                        maxHeight={100}
                         multiline={true}
                         onChangeText={links => this.setState({ links })}
                       />
@@ -218,17 +251,75 @@ export default class CreateProject extends Component {
                 </CardItem>
               </Card>
 
+
+
+            <View style={{flexDirection:"row",flex:1}}>
+              <Card style={{ borderWidth: 2 , flex:1}}>
+                <CardItem header bordered>
+                  
+                  <Text style={{ color: "#333333", fontSize: 12 }}>Participant Username</Text>
+                </CardItem>
+                <CardItem>
+                  <Body>
+                    <Item floatingLabel>
+                      <Input  
+                        multiline={true}                                          
+                        onChangeText={username => this.setState({ username })}
+                      />
+                    </Item>
+                  </Body>
+                </CardItem>
+              </Card>
+              
+              <Card style={{ borderWidth: 2, flex:1 }}>
+                <CardItem header bordered>
+                 
+                  <Text style={{ color: "#333333", fontSize: 12 }}>Manager Username</Text>
+                </CardItem>
+                <CardItem>
+                  <Body>
+                    <Item floatingLabel>
+                      <Input 
+                        multiline={true}                               
+                        onChangeText={username => this.setState({ username })}
+                      />
+                    </Item>
+                  </Body>
+                </CardItem>
+              </Card>
+
+              </View>
+              
+
+           <View style={{flexDirection:"row", flex:1}}>
+            
+              
+              <Button bordered warning style={{flex:1}}
+                   onPress={() => this.findMember("participant")}>
+                <Text style={{textAlign:"center"}}>Add Participant</Text>
+              </Button>
+          
+
+              <Button bordered warning style={{flex:1}}
+                   onPress={() => this.findMember("manager")}>
+                <Text  style={{textAlign:"center"}}>Add Manager</Text>
+              </Button>
+          
+              </View>
+
+
               <Button
                 style={{ backgroundColor: "orange", marginTop: 10 }}
                 block
                 success
                 onPress={() => this.create()}
               >
-                <Text>Add Project</Text>
+                <Text style={{textAlign:"center"}}>Add Project</Text>
               </Button>
             </Content>
+            </ScrollView>
           </Container>
-        </ScrollView>
+        
       </View>
     );
   }

@@ -38,8 +38,9 @@ export default class ProjectDetail extends Component {
     if (this.state.loading) {
       return <AppLoading />;
     }
+
     return (
-      <View style={{ flex: 1 }}>
+      <View>
         <Header
           style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
         >
@@ -55,10 +56,22 @@ export default class ProjectDetail extends Component {
             <Text style={{ color: "white", fontWeight: "bold" }}>DETAILS</Text>
           </Body>
         </Header>
+
+
+
+
         <View style={{ flex: 1 }}>
-          <Text>{this.state.project.desc}</Text>
-          <Text>{this.state.project.name}</Text>
+           
+              <Text>{this.state.project.desc}</Text>
+              <Text>{this.state.project.name}</Text>
+         
         </View>
+
+
+
+
+
+
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
           <TouchableOpacity
