@@ -9,6 +9,9 @@ import {
 import {View, Text, Image,TouchableOpacity} from "react-native";
 
 export default class UserProfile extends Component{
+  static navigationOptions = {
+    header: null
+  };
     render(){
         return(
             <View style={{ backgroundColor:"#fff8f2", flex:1 }}>

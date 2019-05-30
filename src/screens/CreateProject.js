@@ -79,6 +79,58 @@ export default class CreateProject extends Component {
         console.error("Creation Error:", error);
       });
   }
+
+
+  
+  findParticipant() {
+    const {
+      managers,
+    } = this.state;
+
+    axios
+      .post(
+        BASEURL + PROJECT,
+        {         
+          managers: managers,
+        },
+        {
+          headers: { Authorization: username }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error("Find Error:", error);
+      });
+  }
+
+  findManager() {
+    const {
+      participants,
+    } = this.state;
+
+    axios
+      .post(
+        BASEURL + PROJECT,
+        {         
+          participant: participants,
+        },
+        {
+          headers: { Authorization: username }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error("Find Error:", error);
+      });
+  }
+
+
+
+  
   static navigationOptions = {
     header: null
   };
@@ -121,7 +173,7 @@ export default class CreateProject extends Component {
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("TasksScreen")}
+              onPress={() => this.props.navigation.navigate("Discover")}
             >
               <Icon name="md-arrow-back" />
             </Button>
@@ -133,8 +185,9 @@ export default class CreateProject extends Component {
           </Body>
         </Header>
 
-        <ScrollView style={{ flex: 1 }}>
+        
           <Container>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
             <Content>
               <Card style={{ borderWidth: 2 }}>
                 <CardItem header bordered>
@@ -209,7 +262,7 @@ export default class CreateProject extends Component {
                   <Body>
                     <Item floatingLabel>
                       <Input
-                        maxHeight={120}
+                        maxHeight={100}
                         multiline={true}
                         onChangeText={links => this.setState({ links })}
                       />
@@ -217,6 +270,63 @@ export default class CreateProject extends Component {
                   </Body>
                 </CardItem>
               </Card>
+
+
+
+            <View style={{flexDirection:"row",flex:1}}>
+              <Card style={{ borderWidth: 2 , flex:1}}>
+                <CardItem header bordered>
+                  
+                  <Text style={{ color: "#333333", fontSize: 12 }}>Participant Username</Text>
+                </CardItem>
+                <CardItem>
+                  <Body>
+                    <Item floatingLabel>
+                      <Input  
+                        multiline={true}                                          
+                        onChangeText={participants => this.setState({ participants })}
+                      />
+                    </Item>
+                  </Body>
+                </CardItem>
+              </Card>
+              
+              <Card style={{ borderWidth: 2, flex:1 }}>
+                <CardItem header bordered>
+                 
+                  <Text style={{ color: "#333333", fontSize: 12 }}>Manager Username</Text>
+                </CardItem>
+                <CardItem>
+                  <Body>
+                    <Item floatingLabel>
+                      <Input 
+                        multiline={true}                               
+                        onChangeText={participants => this.setState({ participants })}
+                      />
+                    </Item>
+                  </Body>
+                </CardItem>
+              </Card>
+
+              </View>
+              
+
+           <View style={{flexDirection:"row", flex:1}}>
+            
+              
+              <Button bordered warning style={{flex:1}}
+                   onPress={() => this.findParticipant()}>
+                <Text>Add Participant</Text>
+              </Button>
+          
+
+              <Button bordered warning style={{flex:1}}
+                   onPress={() => this.findParticipant()}>
+                <Text>Add Manager</Text>
+              </Button>
+          
+              </View>
+
 
               <Button
                 style={{ backgroundColor: "orange", marginTop: 10 }}
@@ -227,8 +337,9 @@ export default class CreateProject extends Component {
                 <Text>Add Project</Text>
               </Button>
             </Content>
+            </ScrollView>
           </Container>
-        </ScrollView>
+        
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image, Text, Platform } from "react-native";
+import { View, Image, Text, Platform,TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { systemWeights } from "react-native-typography";
 
@@ -38,6 +38,7 @@ export default class Header extends Component {
             justifyContent: "flex-end"
           }}
         >
+          <TouchableOpacity onPress={() => this.props.navigation.navigate("UserProfile")} >
           <Image
             source={bgSrc}
             style={{
@@ -49,6 +50,7 @@ export default class Header extends Component {
               borderRadius: 20
             }}
           />
+          </TouchableOpacity>
         </View>
         <Text
           style={{
