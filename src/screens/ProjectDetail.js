@@ -3,12 +3,25 @@ import {
   Dimensions,
   View,
   Image,
-  Text,
   FlatList,
   TouchableOpacity
 } from "react-native";
-import { Button, Icon, Header, Body, Left } from "native-base";
+import {
+  Button,
+  Icon,
+  Header,
+  Body,
+  Left,
+  Right,
+  Container,
+  Card,
+  CardItem,
+  Content,
+  Text
+} from "native-base";
 import { Font, AppLoading } from "expo";
+import TaskCard from "../components/TaskCard";
+import SubMenuProject from "../components/SubMenuProject";
 
 export default class ProjectDetail extends Component {
   constructor(props) {
@@ -35,12 +48,12 @@ export default class ProjectDetail extends Component {
   render() {
     let { width } = Dimensions.get("window");
     width = width * 0.9;
+
     if (this.state.loading) {
       return <AppLoading />;
     }
-
     return (
-      <View>
+      <Container>
         <Header
           style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
         >
@@ -52,23 +65,73 @@ export default class ProjectDetail extends Component {
               <Icon name="md-arrow-back" />
             </Button>
           </Left>
+
           <Body>
             <Text style={{ color: "white", fontWeight: "bold" }}>DETAILS</Text>
           </Body>
+          <Right>
+            <Body>
+              <SubMenuProject option={this.props.option} />
+            </Body>
+          </Right>
         </Header>
-        <View style={{ flex: 1 }}>
-          <Text>{this.state.project.desc}</Text>
-          <Text>{this.state.project.name}</Text>
-        </View>
+
+        <Content>
+          <Card>
+            <CardItem header bordered>
+              <Text style={{ color: "#565656" }}>PROJECT NAME</Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text>
+                  NativeBase is a free and open source framework that enable
+                  developers to build high-quality mobile apps using React
+                  Native iOS and Android apps with a fusion of ES6.
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text style={{ color: "#565656", fontWeight: "bold" }}>
+                  Deadline:
+                  <Text style={{ color: "red", fontWeight: "normal" }}>
+                    31/05/2019
+                  </Text>
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text style={{ color: "#565656", fontWeight: "bold" }}>
+                  Project Tasks
+                </Text>
+                <View style={{ flex: 1, marginTop: 10 }}>
+                  <FlatList
+                    data={[
+                      { key: "Task 1" },
+                      { key: "Task 2" },
+                      { key: "Task 3" }
+                    ]}
+                    renderItem={({ item }) => <Text>{item.key}</Text>}
+                  />
+                </View>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("CreateTask")}
+            onPress={() =>
+              this.props.navigation.navigate("CreateTask", {
+                project_id: this.state.project._id
+              })
+            }
           >
             <Image source={require("../images/addIcon.png")} />
           </TouchableOpacity>
         </View>
-      </View>
+      </Container>
     );
   }
 }

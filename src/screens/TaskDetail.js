@@ -1,123 +1,84 @@
-import React from "react";
-import { Text, Dimensions, View, FlatList, TextInput } from "react-native";
-import Modal from "react-native-modal";
-import TaskCard from "../components/TaskCard";
+import React, { Component } from "react";
 import {
-  Content,
-  Card,
-  CardItem,
+  Dimensions,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
+import {
   Button,
   Icon,
-  Left,
+  Header,
   Body,
-  Right
+  Left,
+  Container,
+  Card,
+  CardItem,
+  Content,
+  Text
 } from "native-base";
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+import { Font, AppLoading } from "expo";
+import TaskCard from "../components/TaskCard";
 
-const sources = [
-  {
-    taskname: "Github Repository",
-    deadline: "12/02/2020",
-    desc: "Create a github repository",
-    comment: "deneme comment1"
-  },
-  {
-    taskname: "Recovery Code",
-    deadline: "12/02/2020",
-    desc: "When ending projects, recovery code. ",
-    comment: "deneme comment3"
-  }
-];
-
-export default class TaskDetail extends React.Component {
-  constructor() {
-    super();
-    this.state = { loading: true, text: "comment" };
-  }
+export default class ProjectDetail extends Component {
   render() {
+    let { width } = Dimensions.get("window");
+    width = width * 0.9;
+
     return (
-      <Modal
-        isVisible={true} //{this.props.isVisible}
-        hasBackdrop={true}
-        onBackdropPress={this.props.onBackdropPress}
-        style={{
-          borderRadius: 20,
-          marginTop: 75,
-          position: "absolute",
-          padding: 20,
-          backgroundColor: "rgba(255,255,255,0.8)",
-          alignSelf: "center",
-          width: width / 1.4,
-          height: height / 1.5
-          //  backgroundColor: "pink"
-        }}
-      >
-        <View style={{ elevation: 5 }}>
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 18,
-              textAlign: "left",
-              padding: 7
-            }}
-          >
-            Task Name:
-            {sources.name}
-          </Text>
+      <Container>
+        <Header
+          style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
+        >
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Discover")}
+            >
+              <Icon name="md-arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              TASK DETAILS
+            </Text>
+          </Body>
+        </Header>
+
+        <Content>
+          <Card>
+            <CardItem header bordered>
+              <Text style={{ color: "#565656" }}>TASK NAME</Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text>
+                  NativeBase is a free and open source framework that enable
+                  developers to build high-quality mobile apps using React
+                  Native iOS and Android apps with a fusion of ES6.
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text style={{ color: "#565656", fontWeight: "bold" }}>
+                  Deadline:
+                  <Text style={{ color: "red", fontWeight: "normal" }}>
+                    31/05/2019
+                  </Text>
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
+
+        <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
+          <TouchableOpacity>
+            <Image source={require("../images/addIcon.png")} />
+          </TouchableOpacity>
         </View>
-        <View style={{ elevation: 5 }}>
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 18,
-              textAlign: "left",
-              padding: 7
-            }}
-          >
-            Task Detail:{sources.desc}
-            <Text style={{ fontWeight: "normal" }}> I'm task description </Text>
-          </Text>
-        </View>
-        <View style={{ elevation: 5 }}>
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 18,
-              textAlign: "left",
-              padding: 7
-            }}
-          >
-            Due Date:{sources.deadline}
-            <Text style={{ fontWeight: "normal" }}> I'm duedate </Text>
-          </Text>
-        </View>
-        <View style={{ elevation: 5 }}>
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 18,
-              textAlign: "left",
-              padding: 7
-            }}
-          >
-            Comments
-            <TextInput
-              style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-              onChangeText={text => this.setState({ text })}
-              value={this.state.text}
-            />
-          </Text>
-          <View style={{ flex: 1, marginTop: 10 }}>
-            <FlatList
-              data={sources}
-              renderItem={({ item }) => <Text>{item.comment}</Text>}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
-        </View>
-      </Modal>
+      </Container>
     );
   }
 }
