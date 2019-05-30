@@ -53,6 +53,7 @@ export default class DoingScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
         <FlatList
+          key={this.state.projects.length}
           data={this.state.projects}
           renderItem={({ item }) => (
             <Card

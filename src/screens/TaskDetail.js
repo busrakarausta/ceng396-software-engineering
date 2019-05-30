@@ -6,19 +6,10 @@ import { Icon } from "native-base";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const sources = [
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics.",
-    comment: "deneme comment"
-  }
-];
-
 export default class TaskDetail extends React.Component {
-  constructor() {
-    super();
-    this.state = { loading: true };
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, task: props.navigation.state.params.task };
   }
   render() {
     return (
@@ -46,8 +37,7 @@ export default class TaskDetail extends React.Component {
             padding: 7
           }}
         >
-          Task Name:{sources.name}
-          <Text style={{ fontWeight: "normal" }}> Task 1 </Text>
+          Task Detail:{this.state.task.desc}
         </Text>
         <Text
           style={{
@@ -57,8 +47,7 @@ export default class TaskDetail extends React.Component {
             padding: 7
           }}
         >
-          Task Detail:{sources.desc}
-          <Text style={{ fontWeight: "normal" }}> I'm task description </Text>
+          Due Date:{this.state.task.dueDate}
         </Text>
         <Text
           style={{
@@ -68,18 +57,7 @@ export default class TaskDetail extends React.Component {
             padding: 7
           }}
         >
-          Due Date:{sources.deadline}
-          <Text style={{ fontWeight: "normal" }}> I'm duedate </Text>
-        </Text>
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 18,
-            textAlign: "left",
-            padding: 7
-          }}
-        >
-          Comments {sources.comment} {"\n"}
+          status {this.state.task.status} {"\n"}
           <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
           <Text style={{ fontWeight: "normal" }}> We are comments </Text>
           {"\n"}

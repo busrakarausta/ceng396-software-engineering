@@ -56,7 +56,7 @@ export default class CreateProject extends Component {
           name: pname,
           creater: current_id,
           desc: description,
-          status: 0,
+          status: 1,
           participant: participants,
           tasks: [],
           managers: managers,

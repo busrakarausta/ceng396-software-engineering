@@ -62,7 +62,11 @@ export default class ProjectDetail extends Component {
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("CreateTask")}
+            onPress={() =>
+              this.props.navigation.navigate("CreateTask", {
+                project_id: this.state.project._id
+              })
+            }
           >
             <Image source={require("../images/addIcon.png")} />
           </TouchableOpacity>
