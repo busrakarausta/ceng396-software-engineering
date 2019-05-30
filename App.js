@@ -1,13 +1,12 @@
 import React from "react";
-import { View, StatusBar, SafeAreaView, ScrollView } from "react-native";
+import { View, StatusBar } from "react-native";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignupScreen from "./src/screens/SignupScreen";
 import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  DrawerItems,
-  createDrawerNavigator
+  TabNavigator
 } from "react-navigation";
 import DiscoverScreen from "./src/screens/DiscoverScreen";
 import Header from "./src/components/Header";
@@ -25,32 +24,25 @@ import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
 import UserProfile from "./src/screens/UserProfile";
 import Settings from "./src/screens/Settings";
-import SubMenuProject from "./src/components/SubMenuProject";
+
 const TabNavigation = createBottomTabNavigator(
   {
     Discover: DiscoverScreen,
+    CreateTask: CreateTask,
+    CreateProject: CreateProject,
+    Completed: CompletedScreen,
+    ToDo: ToDoScreen,
+    InProgress: InProgressScreen,
     Done: DoneScreen,
     Doing: DoingScreen
   },
   {
-    tabBarComponent: props => <BottomBar {...props} />
+    tabBarComponent: (navigation, props) => <BottomBar {...props} />
   }
 );
-const CustomDrawerComponent = props => (
-  <SafeAreaView
-    style={{
-      flex: 1
-    }}
-  >
-    <ScrollView>
-      <DrawerItems {...props} />
-    </ScrollView>
-  </SafeAreaView>
-);
-
-const HomeNavigator = createDrawerNavigator(
+const HomeNavigator = createStackNavigator(
   {
-    Home: TabNavigation
+    Tab: TabNavigation
   },
   {
     headerMode: "none",
@@ -78,7 +70,8 @@ const ProjectNavigator = createStackNavigator(
   },
   {
     navigationOptions: {
-      header: null
+      title: "Discover  ",
+      header: (navigation, props) => <Header {...props} {...navigation} />
     }
   }
 );
@@ -97,7 +90,7 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar hidden={true} />
         <MenuProvider>
-          <ProjectDetail />
+          <AppContainer />
         </MenuProvider>
       </View>
     );

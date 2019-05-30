@@ -21,7 +21,11 @@ import {
 import { Font, AppLoading } from "expo";
 import TaskCard from "../components/TaskCard";
 
-export default class ProjectDetail extends Component {
+export default class TaskDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, task: props.navigation.state.params.task };
+  }
   render() {
     let { width } = Dimensions.get("window");
     width = width * 0.9;

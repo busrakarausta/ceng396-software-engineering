@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Dimensions,
-  View,
-  Image,
-  FlatList,
-  TouchableOpacity
-} from "react-native";
+import { Dimensions, View, Image, TouchableOpacity } from "react-native";
 import {
   Button,
   Icon,
@@ -20,7 +14,7 @@ import {
   Text
 } from "native-base";
 import { Font, AppLoading } from "expo";
-import TaskCard from "../components/TaskCard";
+import TaskScreen from "./TaskScreen";
 import SubMenuProject from "../components/SubMenuProject";
 
 export default class ProjectDetail extends Component {
@@ -65,9 +59,10 @@ export default class ProjectDetail extends Component {
               <Icon name="md-arrow-back" />
             </Button>
           </Left>
-
           <Body>
-            <Text style={{ color: "white", fontWeight: "bold" }}>DETAILS</Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              PROJECT DETAILS
+            </Text>
           </Body>
           <Right>
             <Body>
@@ -100,25 +95,10 @@ export default class ProjectDetail extends Component {
                 </Text>
               </Body>
             </CardItem>
-            <CardItem bordered>
-              <Body>
-                <Text style={{ color: "#565656", fontWeight: "bold" }}>
-                  Project Tasks
-                </Text>
-                <View style={{ flex: 1, marginTop: 10 }}>
-                  <FlatList
-                    data={[
-                      { key: "Task 1" },
-                      { key: "Task 2" },
-                      { key: "Task 3" }
-                    ]}
-                    renderItem={({ item }) => <Text>{item.key}</Text>}
-                  />
-                </View>
-              </Body>
-            </CardItem>
           </Card>
         </Content>
+
+        <TaskScreen style={{ marginTop: 15 }} />
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
           <TouchableOpacity

@@ -8,7 +8,7 @@ import {
 } from "react-native-popup-menu";
 import { Icon } from "native-base";
 
-export default class SubMenuProject extends Component {
+export default class SubMenu extends Component {
   render() {
     return (
       <Menu onSelect={value => alert(`Selected number: ${value}`)}>
@@ -19,7 +19,6 @@ export default class SubMenuProject extends Component {
           {this.props.option ? (
             <MenuOption value={1} text={this.props.option} />
           ) : null}
-
           <MenuOption value={2} text="Delete" />
         </MenuOptions>
       </Menu>
