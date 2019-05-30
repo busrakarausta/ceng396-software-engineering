@@ -17,7 +17,7 @@ import {
   Icon
 } from "native-base";
 import { Font, AppLoading } from "expo";
-import { BASEURL, PROJECT, CURRENT_ID, ACCESSTOKEN } from "../const/base_const";
+import { BASEURL, PROJECT, CURRENT_ID, ACCESSTOKEN, USER } from "../const/base_const";
 
 export default class CreateProject extends Component {
   constructor(props) {
@@ -32,7 +32,8 @@ export default class CreateProject extends Component {
       chosenDate: new Date(),
       loading: true,
       managers: [],
-      participants: []
+      participants: [],
+      username:""
     };
   }
   setDate(newDate) {
@@ -82,51 +83,30 @@ export default class CreateProject extends Component {
 
 
   
-  findParticipant() {
-    const {
-      managers,
-    } = this.state;
+  findMember(type) {
 
     axios
-      .post(
-        BASEURL + PROJECT,
-        {         
-          managers: managers,
-        },
+      .get(
+        BASEURL + USER + this.state.username,
         {
-          headers: { Authorization: username }
+          headers: { Authorization: this.state.token }
         }
       )
       .then(response => {
         console.log(response.data);
+        if(type=="participant")
+             this.setState({participants:[...this.state.participants,response.data]});
+        else if(type=="manager")
+             this.setState({managers:[...this.state.managers, {m_id:response.data}]});
+
+
+
       })
       .catch(error => {
         console.error("Find Error:", error);
       });
   }
 
-  findManager() {
-    const {
-      participants,
-    } = this.state;
-
-    axios
-      .post(
-        BASEURL + PROJECT,
-        {         
-          participant: participants,
-        },
-        {
-          headers: { Authorization: username }
-        }
-      )
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error("Find Error:", error);
-      });
-  }
 
 
 
@@ -284,7 +264,7 @@ export default class CreateProject extends Component {
                     <Item floatingLabel>
                       <Input  
                         multiline={true}                                          
-                        onChangeText={participants => this.setState({ participants })}
+                        onChangeText={username => this.setState({ username })}
                       />
                     </Item>
                   </Body>
@@ -301,7 +281,7 @@ export default class CreateProject extends Component {
                     <Item floatingLabel>
                       <Input 
                         multiline={true}                               
-                        onChangeText={participants => this.setState({ participants })}
+                        onChangeText={username => this.setState({ username })}
                       />
                     </Item>
                   </Body>
@@ -315,14 +295,14 @@ export default class CreateProject extends Component {
             
               
               <Button bordered warning style={{flex:1}}
-                   onPress={() => this.findParticipant()}>
-                <Text>Add Participant</Text>
+                   onPress={() => this.findMember("participant")}>
+                <Text style={{textAlign:"center"}}>Add Participant</Text>
               </Button>
           
 
               <Button bordered warning style={{flex:1}}
-                   onPress={() => this.findParticipant()}>
-                <Text>Add Manager</Text>
+                   onPress={() => this.findMember("manager")}>
+                <Text  style={{textAlign:"center"}}>Add Manager</Text>
               </Button>
           
               </View>
@@ -334,7 +314,7 @@ export default class CreateProject extends Component {
                 success
                 onPress={() => this.create()}
               >
-                <Text>Add Project</Text>
+                <Text style={{textAlign:"center"}}>Add Project</Text>
               </Button>
             </Content>
             </ScrollView>
