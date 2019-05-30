@@ -19,27 +19,7 @@ export default class TaskScreen extends Component {
   };
   render() {
     return (
-      <Container>
-        <Header style={{ backgroundColor: "orange" }}>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("ProjectDetail")}
-            >
-              <Icon name="md-arrow-round-back" />
-            </Button>
-          </Left>
-
-          <Right>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("Discover")}
-            >
-              <Icon name="home" />
-            </Button>
-          </Right>
-        </Header>
-
+      <Container style={{marginTop:5}}>
         <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="To Do">
             <ToDoScreen />
