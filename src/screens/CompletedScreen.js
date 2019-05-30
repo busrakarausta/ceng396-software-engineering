@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, AsyncStorage } from "react-native";
 import TaskCard from "../components/TaskCard";
-
+import axios from "axios";
+import { ACCESSTOKEN, BASEURL, TASK } from "../const/base_const";
 export default class CompletedScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { tasks: [], token: "", status: 3 };
+    this.state = {
+      tasks: [],
+      token: "",
+      status: 3,
+      project_id: props.projectID
+    };
   }
 
   componentWillMount() {
@@ -27,7 +33,7 @@ export default class CompletedScreen extends Component {
     } catch (error) {}
     if (this.state.token) {
       axios
-        .get(BASEURL + TASK + this.props.project_id + "/" + this.state.status, {
+        .get(BASEURL + TASK + this.state.project_id + "/" + this.state.status, {
           headers: { Authorization: this.state.token }
         })
         .then(response => {

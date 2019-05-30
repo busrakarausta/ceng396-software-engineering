@@ -1,24 +1,28 @@
 import React, { Component } from "react";
+import { Dimensions, View, Image, TouchableOpacity } from "react-native";
 import {
-  Dimensions,
-  View,
-  Image,
-  TouchableOpacity
-} from "react-native";
-import { Button, Icon, Header, Body, Left,Container,
+  Button,
+  Icon,
+  Header,
+  Body,
+  Left,
+  Right,
+  Container,
   Card,
   CardItem,
   Content,
-  Text } from "native-base";
+  Text
+} from "native-base";
 import { Font, AppLoading } from "expo";
 import TaskScreen from "./TaskScreen";
+import SubMenuProject from "../components/SubMenuProject";
 
 export default class ProjectDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      project: props.navigation.state.params.project,
+      project: props.navigation.state.params.project
     };
   }
   async componentDidMount() {
@@ -50,34 +54,55 @@ export default class ProjectDetail extends Component {
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("CreateTask")}
+              onPress={() => this.props.navigation.navigate("Discover")}
             >
               <Icon name="md-arrow-back" />
             </Button>
           </Left>
           <Body>
-            <Text style={{ color: "white", fontWeight: "bold" }}>DETAILS</Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              PROJECT DETAILS
+            </Text>
           </Body>
+          <Right>
+            <Body>
+              <SubMenuProject
+                id={this.state.project._id}
+                status={this.state.project.status}
+              />
+            </Body>
+          </Right>
         </Header>
-
-
-
 
         <Content>
           <Card>
             <CardItem header bordered>
-              <Text style={{ color: "#565656" }}> {this.state.project.name}</Text>
+              <Text style={{ color: "#565656" }}>
+                {this.state.project.name}
+              </Text>
             </CardItem>
             <CardItem bordered>
               <Body>
                 <Text>{this.state.project.desc}</Text>
               </Body>
             </CardItem>
-
+            <CardItem bordered>
+              <Body>
+                <Text style={{ color: "#565656", fontWeight: "bold" }}>
+                  Deadline:
+                  <Text style={{ color: "red", fontWeight: "normal" }}>
+                    {this.state.project.dueDate}
+                  </Text>
+                </Text>
+              </Body>
+            </CardItem>
           </Card>
         </Content>
-       
-       <TaskScreen style={{marginTop:15}} />
+
+        <TaskScreen
+          style={{ marginTop: 15 }}
+          projectId={this.state.project._id}
+        />
 
         <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
           <TouchableOpacity
@@ -90,9 +115,7 @@ export default class ProjectDetail extends Component {
             <Image source={require("../images/addIcon.png")} />
           </TouchableOpacity>
         </View>
-        </Container>
+      </Container>
     );
   }
 }
-
-

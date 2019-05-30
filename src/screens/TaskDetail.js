@@ -1,10 +1,23 @@
-import React from "react";
-import { Text, Dimensions } from "react-native";
-import Modal from "react-native-modal";
-import TaskCard from "../components/TaskCard";
-import { Icon } from "native-base";
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+import React, { Component } from "react";
+import {
+  Dimensions,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
+import {
+  Button,
+  Icon,
+  Header,
+  Body,
+  Left,
+  Container,
+  Card,
+  CardItem,
+  Content,
+  Text
+} from "native-base";
 
 export default class TaskDetail extends React.Component {
   constructor(props) {
@@ -12,62 +25,62 @@ export default class TaskDetail extends React.Component {
     this.state = { loading: true, task: props.navigation.state.params.task };
   }
   render() {
+    let { width } = Dimensions.get("window");
+    width = width * 0.9;
+
     return (
-      <Modal
-        isVisible={true}
-        hasBackdrop={true}
-        onBackdropPress={this.props.onBackdropPress}
-        style={{
-          borderRadius: 20,
-          marginTop: 20,
-          position: "absolute",
-          padding: 20,
-          alignSelf: "center",
-          width: width / 1.5,
-          height: height / 1.5,
-          backgroundColor: "pink"
-        }}
-      >
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 18,
-            textAlign: "left",
-            padding: 7
-          }}
+      <Container>
+        <Header
+          style={{ justifyContent: "flex-start", backgroundColor: "orange" }}
         >
-          Task Detail:{this.state.task.desc}
-        </Text>
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 18,
-            textAlign: "left",
-            padding: 7
-          }}
-        >
-          Due Date:{this.state.task.dueDate}
-        </Text>
-        <Text
-          style={{
-            fontWeight: "bold",
-            fontSize: 18,
-            textAlign: "left",
-            padding: 7
-          }}
-        >
-          status {this.state.task.status} {"\n"}
-          <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
-          <Text style={{ fontWeight: "normal" }}> We are comments </Text>
-          {"\n"}
-          <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
-          <Text style={{ fontWeight: "normal" }}> We are comments </Text>
-          {"\n"}
-          <Icon active style={{ fontSize: 20 }} name="chatbubbles" />
-          <Text style={{ fontWeight: "normal" }}> We are comments </Text>
-          {"\n"}
-        </Text>
-      </Modal>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Discover")}
+            >
+              <Icon name="md-arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              TASK DETAILS
+            </Text>
+          </Body>
+        </Header>
+
+        <Content>
+          <Card>
+            <CardItem header bordered>
+              <Text style={{ color: "#565656" }}>TASK NAME</Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text>
+                  NativeBase is a free and open source framework that enable
+                  developers to build high-quality mobile apps using React
+                  Native iOS and Android apps with a fusion of ES6.
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text style={{ color: "#565656", fontWeight: "bold" }}>
+                  Deadline:
+                  <Text style={{ color: "red", fontWeight: "normal" }}>
+                    31/05/2019
+                  </Text>
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
+
+        <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
+          <TouchableOpacity>
+            <Image source={require("../images/addIcon.png")} />
+          </TouchableOpacity>
+        </View>
+      </Container>
     );
   }
 }

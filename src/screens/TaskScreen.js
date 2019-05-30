@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Tab,
-  Tabs,
-  ScrollableTab,
-  Left,
-  Header,
-  Right,
-  Button,
-  Icon
-} from "native-base";
+import { Container, Tab, Tabs, ScrollableTab } from "native-base";
 import ToDoScreen from "./ToDoScreen";
 import InProgressScreen from "./InProgressScreen";
 import CompletedScreen from "./CompletedScreen";
@@ -19,7 +9,7 @@ export default class TaskScreen extends Component {
   };
   render() {
     return (
-      <Container style={{marginTop:5}}>
+      <Container style={{ marginTop: 5 }}>
         <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="To Do">
             <ToDoScreen projectID={this.props.projectId} />

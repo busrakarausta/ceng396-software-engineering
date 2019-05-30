@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { View, Text, Image } from "react-native";
 import {
   Menu,
   MenuOptions,
@@ -8,36 +7,49 @@ import {
 } from "react-native-popup-menu";
 import { Icon } from "native-base";
 import axios from "axios";
-import { TASK, DELETE, BASEURL } from "../../const/base_const";
+import { PROJECT, DELETE, BASEURL, TASK } from "../const/base_const";
 
-export default class SubMenu extends Component {
+export default class SubMenuProject extends Component {
   constructor(props) {
     super(props);
-    this.state = { status: 1, token: "" };
+    this.state = { status: 1, token: "", option: "" };
   }
 
   delete() {
     axios
       .delete(
-        BASEURL + TASK + DELETE + this.props.id,
+        BASEURL + PROJECT + DELETE + this.props.id,
         {},
         {
           headers: { Authorization: this.state.token }
         }
       )
       .then(response => {
-        console.log(response.data);
-        alert(response.data);
+        axios
+          .delete(
+            BASEURL + TASK + DELETE + "all/" + this.props.id,
+            {},
+            {
+              headers: { Authorization: this.state.token }
+            }
+          )
+          .then(response => {
+            console.log(response.data.message);
+          })
+          .catch(error => {
+            console.error("Delete Error:", error);
+          });
       })
       .catch(error => {
-        console.error("Creation Error:", error);
+        console.error("Delete Error:", error);
       });
   }
   changeProgress() {
+    this.setState({ status: this.state.status + 1 });
     console.log(this.state.status);
     axios
       .put(
-        BASEURL + TASK + this.props.id,
+        BASEURL + PROJECT + this.props.id,
         {
           status: this.state.status
         },
@@ -67,15 +79,8 @@ export default class SubMenu extends Component {
     } catch (error) {}
   };
   async componentWillMount() {
-    await this._getProjects();
-    const inProgress = "In Progress";
-    const done = "Done";
-    console.log(this.props.option);
-    if (this.props.option === done) this.setState({ status: 3 });
-    else if (this.props.option === inProgress) {
-      this.setState({ status: 2 });
-      console.log(this.state.status);
-    }
+    this._getProjects();
+    if (this.props.status === 1) this.setState({ option: "Done" });
   }
   render() {
     return (
@@ -84,11 +89,11 @@ export default class SubMenu extends Component {
           <Icon type="MaterialCommunityIcons" name="dots-horizontal" />
         </MenuTrigger>
         <MenuOptions>
-          {this.props.option ? (
+          {this.state.option ? (
             <MenuOption
               onSelect={() => this.changeProgress()}
               value={1}
-              text={this.props.option}
+              text={this.state.option}
             />
           ) : null}
           <MenuOption onSelect={() => this.delete()} value={2} text="Delete" />

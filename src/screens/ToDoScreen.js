@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, AsyncStorage } from "react-native";
 import TaskCard from "../components/TaskCard";
-
+import axios from "axios";
+import { ACCESSTOKEN, BASEURL, TASK } from "../const/base_const";
 export default class ToDoScreen extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,7 @@ export default class ToDoScreen extends Component {
 
   componentWillMount() {
     this._getProjects();
+    console.log(this.state.project_id);
   }
   _retrieveData = async () => {
     try {
