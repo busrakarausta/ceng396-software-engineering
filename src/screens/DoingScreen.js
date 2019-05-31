@@ -59,7 +59,7 @@ export default class DoingScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header title="Doing" navigation={() => this.props.navigation} />
+        <Header title="Doing" navigation={this.props.navigation} />
         <FlatList
           key={this.state.projects.length}
           data={this.state.projects}

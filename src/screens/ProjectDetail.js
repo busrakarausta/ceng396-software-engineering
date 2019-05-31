@@ -16,6 +16,7 @@ import {
 import { Font, AppLoading } from "expo";
 import { MaterialIcons } from "@expo/vector-icons";
 import TaskScreen from "./TaskScreen";
+import Moment from "moment";
 import SubMenuProject from "../components/SubMenuProject";
 
 export default class ProjectDetail extends Component {
@@ -55,7 +56,7 @@ export default class ProjectDetail extends Component {
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("Discover")}
+              onPress={() => this.props.navigation.navigate("Doing")}
             >
               <Icon name="md-arrow-back" />
             </Button>
@@ -104,7 +105,7 @@ export default class ProjectDetail extends Component {
                 <Text style={{ color: "#565656", fontWeight: "bold" }}>
                   Deadline:
                   <Text style={{ color: "red", fontWeight: "normal" }}>
-                    {this.state.project.dueDate.toString().substr(4, 12)}
+                    {Moment(this.state.project.dueDate).format("d MMM")}
                   </Text>
                 </Text>
               </Body>

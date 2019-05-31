@@ -59,7 +59,7 @@ export default class DoneScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Header title="Done" navigation={() => this.props.navigation} />
+        <Header title="Done" navigation={this.props.navigation} />
         <FlatList
           data={this.state.projects}
           refreshControl={

@@ -28,10 +28,10 @@ const TabNavigation = createBottomTabNavigator(
     Discover: DiscoverScreen,
     Doing: DoingScreen,
     Done: DoneScreen
-  } /*,
+  },
   {
     tabBarComponent: props => <BottomBar {...props} />
-  }*/
+  }
 );
 const CustomDrawerComponent = props => (
   <SafeAreaView
@@ -62,12 +62,12 @@ const HomeNavigator = createDrawerNavigator(
 
 const ProjectNavigator = createStackNavigator(
   {
-    TaskScreen: TaskScreen,
-    ProjectDetail: ProjectDetail,
-    TaskDetail: TaskDetail,
     CreateProject: CreateProject,
+    ProjectDetail: ProjectDetail,
     CreateTask: CreateTask,
-    EditProject: EditProject
+    TaskDetail: TaskDetail,
+    EditProject: EditProject,
+    TaskScreen: TaskScreen
   },
   {
     navigationOptions: {

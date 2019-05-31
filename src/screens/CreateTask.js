@@ -65,9 +65,9 @@ export default class CreateTask extends Component {
       )
       .then(response => {
         console.log(response.data);
-        this.props.navigation.navigate("TaskDetail", {
-          task: response.data
-        });
+
+        alert("Task is added successfully");
+        this.props.navigation.goBack();
       })
       .catch(error => {
         console.error("Creation Error:", error);

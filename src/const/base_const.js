@@ -8,7 +8,3 @@ export const DELETE = "delete/";
 export const CURRENT_USER = "me";
 export const CURRENT_ID = "currentId";
 export const STATUS = "status";
-export const LOOKUP = "lookup/status";
-export const TYPES = "lookup/type";
-export const ALERT_ERROR = "Something went wrong";
-export const MISSED_REQUIRED = "Zorunlu alanları doldurunuz!";
