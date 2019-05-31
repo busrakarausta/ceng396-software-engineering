@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Header, Left, Body, Icon, Right } from "native-base";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { CalendarPicker } from "react-native-calendar-picker";
-
+import Calendar from "../components/Calendar";
 export default class UserProfile extends Component {
   static navigationOptions = {
     header: null
@@ -22,7 +22,9 @@ export default class UserProfile extends Component {
           <Right>
             <Button
               transparent
-              onPress={() => this.props.navigation.navigate("Calendar")}
+              onPress={() => (
+                <Calendar> </Calendar>
+              )} /*this.props.navigation.navigate("Calendar")*/
             >
               <Icon name="md-calendar" />
             </Button>
@@ -32,7 +34,7 @@ export default class UserProfile extends Component {
           </Body>
         </Header>
         <View style={{ marginTop: 60 }}>
-          <Image style={styles.img} source={require("../images/pp.jpg")} />
+          ./images/pp.jpg")} />
           <Text style={styles.name}> Nuran Şanlısoy</Text>
           <Text style={styles.uname}> @nuransanlisoy</Text>
           <Text style={styles.friends}> Friends:</Text>

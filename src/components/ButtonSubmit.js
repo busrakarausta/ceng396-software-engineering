@@ -28,12 +28,16 @@ export default class ButtonSubmit extends Component {
     super();
 
     this.state = {
-      isLoading: false
+      isLoading: false,
+      token: "",
+      id: ""
     };
 
     this.buttonAnimated = new Animated.Value(0);
     this.growAnimated = new Animated.Value(0);
     this._onPress = this._onPress.bind(this);
+    this._actionLogin = this._actionLogin.bind(this);
+    this._actionSignup = this._actionSignup.bind(this);
   }
 
   _actionSignup() {
@@ -47,8 +51,11 @@ export default class ButtonSubmit extends Component {
       })
       .then(response => {
         console.log(response.data);
-        this._storeData(ACCESSTOKEN, response.data.token);
-        this._storeData(CURRENT_ID, response.data.user._id);
+        this.setState({
+          token: response.data.token,
+          id: response.data.user._id
+        });
+        this.runFunc();
       })
       .catch(error => {
         console.error("registerAction:", error);
@@ -63,22 +70,37 @@ export default class ButtonSubmit extends Component {
     }
   };
 
+  async runFunc() {
+    if (this.state.token != null) {
+      console.log(this.state.token);
+      await this._storeData(ACCESSTOKEN, this.state.token);
+      await this._storeData(CURRENT_ID, this.state.id);
+      this.props.onPress();
+    } else alert("There was a mistake");
+  }
+
   _actionLogin() {
     const { email, password } = this.props;
-
-    axios
-      .post(BASEURL + AUTH, {
-        email: email,
-        password: password
-      })
-      .then(response => {
-        console.log(response.data);
-        this._storeData(ACCESSTOKEN, response.data.token);
-        this._storeData(CURRENT_ID, response.data.user._id);
-      })
-      .catch(error => {
-        console.error("loginAction:", error);
-      });
+    try {
+      axios
+        .post(BASEURL + AUTH, {
+          email: email,
+          password: password
+        })
+        .then(response => {
+          this.setState({
+            token: response.data.token,
+            id: response.data.user._id
+          });
+          console.log("state:", this.state.token);
+          this.runFunc();
+        })
+        .catch(error => {
+          alert(error);
+        });
+    } catch (error) {
+      alert("Something went wrong");
+    }
   }
 
   _onPress() {
@@ -95,11 +117,12 @@ export default class ButtonSubmit extends Component {
       this._onGrow();
       this._navigateTo();
     }, 4000);
+
+    return;
   }
   _navigateTo = () => {
     if (this.props.username == null) this._actionLogin();
     else if (this.props.username != null) this._actionSignup();
-    this.props.onPress();
   };
 
   _onGrow() {

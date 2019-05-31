@@ -25,7 +25,7 @@ import {
   USER
 } from "../const/base_const";
 
-export default class CreateProject extends Component {
+export default class EditProject extends Component {
   constructor(props) {
     super(props);
     this.setDate = this.setDate.bind(this);
@@ -178,7 +178,10 @@ export default class CreateProject extends Component {
                 <CardItem>
                   <Body>
                     <Item floatingLabel>
-                      <Input onChangeText={pname => this.setState({ pname })} />
+                      <Input
+                        onChangeText={pname => this.setState({ pname })}
+                        placeholder={this.state.pname}
+                      />
                     </Item>
                   </Body>
                 </CardItem>
@@ -194,6 +197,7 @@ export default class CreateProject extends Component {
                   <Body>
                     <Item floatingLabel>
                       <Input
+                        placeholder={this.state.desc}
                         maxHeight={150}
                         multiline={true}
                         onChangeText={description =>
@@ -236,6 +240,7 @@ export default class CreateProject extends Component {
                   <Body>
                     <Item floatingLabel>
                       <Input
+                        placeholder={this.state.links}
                         maxHeight={100}
                         multiline={true}
                         onChangeText={links => this.setState({ links })}
@@ -244,67 +249,13 @@ export default class CreateProject extends Component {
                   </Body>
                 </CardItem>
               </Card>
-              <View style={{ flexDirection: "row", flex: 1 }}>
-                <Card style={{ borderWidth: 2, flex: 1 }}>
-                  <CardItem header bordered>
-                    <Text style={{ color: "#333333", fontSize: 12 }}>
-                      Participant Username
-                    </Text>
-                  </CardItem>
-                  <CardItem>
-                    <Body>
-                      <Item floatingLabel>
-                        <Input
-                          multiline={true}
-                          onChangeText={username => this.setState({ username })}
-                        />
-                      </Item>
-                    </Body>
-                  </CardItem>
-                </Card>
-                <Card style={{ borderWidth: 2, flex: 1 }}>
-                  <CardItem header bordered>
-                    <Text style={{ color: "#333333", fontSize: 12 }}>
-                      Manager Username
-                    </Text>
-                  </CardItem>
-                  <CardItem>
-                    <Body>
-                      <Item floatingLabel>
-                        <Input
-                          multiline={true}
-                          onChangeText={username => this.setState({ username })}
-                        />
-                      </Item>
-                    </Body>
-                  </CardItem>
-                </Card>
-              </View>
-              <View style={{ flexDirection: "row", flex: 1 }}>
-                <Button
-                  bordered
-                  warning
-                  style={{ flex: 1 }}
-                  onPress={() => this.findMember("participant")}
-                >
-                  <Text style={{ textAlign: "center" }}>Add Participant</Text>
-                </Button>
-                <Button
-                  bordered
-                  warning
-                  style={{ flex: 1 }}
-                  onPress={() => this.findMember("manager")}
-                >
-                  <Text style={{ textAlign: "center" }}>Add Manager</Text>
-                </Button>
-              </View>
               <Button
                 style={{ backgroundColor: "orange", marginTop: 10 }}
                 block
                 success
                 onPress={() => this.create()}
               >
-                <Text style={{ textAlign: "center" }}>Add Project</Text>
+                <Text style={{ textAlign: "center" }}>Edit Project</Text>
               </Button>
             </Content>
           </ScrollView>

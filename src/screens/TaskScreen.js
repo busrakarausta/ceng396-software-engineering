@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Tab,
-  Tabs,
-  ScrollableTab,
-  Left,
-  Header,
-  Right,
-  Button,
-  Icon
-} from "native-base";
+import { Container, Tab, Tabs, ScrollableTab } from "native-base";
 import ToDoScreen from "./ToDoScreen";
 import InProgressScreen from "./InProgressScreen";
 import CompletedScreen from "./CompletedScreen";
@@ -19,36 +9,16 @@ export default class TaskScreen extends Component {
   };
   render() {
     return (
-      <Container>
-        <Header style={{ backgroundColor: "orange" }}>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("ProjectDetail")}
-            >
-              <Icon name="md-arrow-round-back" />
-            </Button>
-          </Left>
-
-          <Right>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("Discover")}
-            >
-              <Icon name="home" />
-            </Button>
-          </Right>
-        </Header>
-
+      <Container style={{ marginTop: 5 }}>
         <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="To Do">
-            <ToDoScreen />
+            <ToDoScreen projectID={this.props.projectId} />
           </Tab>
           <Tab heading="In Progress">
-            <InProgressScreen />
+            <InProgressScreen projectID={this.props.projectId} />
           </Tab>
           <Tab heading="Completed">
-            <CompletedScreen />
+            <CompletedScreen projectID={this.props.projectId} />
           </Tab>
         </Tabs>
       </Container>

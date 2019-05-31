@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, AsyncStorage } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  AsyncStorage,
+  RefreshControl
+} from "react-native";
 import Card from "../components/Card";
 import axios from "axios";
 import Timestamp from "react-timestamp";
+import Header from "../components/Header";
 import { ACCESSTOKEN, CURRENT_ID, PROJECT, BASEURL } from "../const/base_const";
 
 export default class DoneScreen extends Component {
@@ -10,9 +17,6 @@ export default class DoneScreen extends Component {
     super(props);
     this.state = { projects: [], token: "", current_id: "", status: 2 };
   }
-  static navigationOptions = {
-    header: null
-  };
 
   componentWillMount() {
     this._getProjects();
@@ -55,8 +59,16 @@ export default class DoneScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Header title="Done" navigation={() => this.props.navigation} />
         <FlatList
           data={this.state.projects}
+          refreshControl={
+            <RefreshControl
+              colors={["#9Bd35A", "#689F38"]}
+              refreshing={this.props.refreshing}
+              onRefresh={this._getProjects.bind(this)}
+            />
+          }
           renderItem={({ item }) => (
             <Card
               title={item.name}

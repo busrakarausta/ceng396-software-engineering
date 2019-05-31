@@ -14,6 +14,10 @@ import {
   Text
 } from "native-base";
 import { Font, AppLoading } from "expo";
+<<<<<<< HEAD
+=======
+import { MaterialIcons } from "@expo/vector-icons";
+>>>>>>> e671678e12327fd20d8b2d09f79a2f928bd1d8f2
 import TaskScreen from "./TaskScreen";
 import SubMenuProject from "../components/SubMenuProject";
 
@@ -66,6 +70,7 @@ export default class ProjectDetail extends Component {
           </Body>
           <Right>
             <Body>
+<<<<<<< HEAD
               <SubMenuProject option={this.props.option} />
             </Body>
           </Right>
@@ -111,6 +116,70 @@ export default class ProjectDetail extends Component {
             <Image source={require("../images/addIcon.png")} />
           </TouchableOpacity>
         </View>
+=======
+              <SubMenuProject
+                navigation={() => this.props.navigation}
+                id={this.state.project._id}
+                status={this.state.project.status}
+              />
+            </Body>
+            <Body>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("EditProject", {
+                    project: this.state.project
+                  })
+                }
+              >
+                <MaterialIcons name="edit" size={25} />
+              </TouchableOpacity>
+            </Body>
+          </Right>
+        </Header>
+
+        <Content>
+          <Card>
+            <CardItem header bordered>
+              <Text style={{ color: "#565656" }}>
+                {this.state.project.name}
+              </Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text>{this.state.project.desc}</Text>
+              </Body>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Text style={{ color: "#565656", fontWeight: "bold" }}>
+                  Deadline:
+                  <Text style={{ color: "red", fontWeight: "normal" }}>
+                    {this.state.project.dueDate.toString().substr(4, 12)}
+                  </Text>
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
+
+        <TaskScreen
+          style={{ marginTop: 15 }}
+          projectId={this.state.project._id}
+        />
+        {this.state.project.status === 1 ? (
+          <View style={{ alignSelf: "flex-end", marginBottom: 6 }}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("CreateTask", {
+                  project_id: this.state.project._id
+                })
+              }
+            >
+              <Image source={require("../images/addIcon.png")} />
+            </TouchableOpacity>
+          </View>
+        ) : null}
+>>>>>>> e671678e12327fd20d8b2d09f79a2f928bd1d8f2
       </Container>
     );
   }

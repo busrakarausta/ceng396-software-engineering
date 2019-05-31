@@ -18,7 +18,7 @@ export default class LoginScreen extends Component {
       token: ""
     };
   }
-  /*_retrieveData = async name => {
+  _retrieveData = async name => {
     try {
       const value = await AsyncStorage.getItem(name);
 
@@ -28,11 +28,11 @@ export default class LoginScreen extends Component {
       // Error retrieving data
     }
   };
-  componentWillMount() {
-    this._retrieveData(ACCESSTOKEN);
+  async componentWillMount() {
+    await this._retrieveData(ACCESSTOKEN);
     console.log("token login", this.state.token);
     if (this.state.token) this.props.navigation.navigate("Home");
-  }*/
+  }
   static navigationOptions = {
     header: null
   };

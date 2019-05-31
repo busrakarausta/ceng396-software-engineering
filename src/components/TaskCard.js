@@ -11,6 +11,7 @@ import {
   Body,
   Right
 } from "native-base";
+import Timestamp from "react-timestamp";
 import { Font, AppLoading } from "expo";
 import SubMenu from "./TaskCards/SubMenu";
 export default class TaskCard extends Component {
@@ -31,7 +32,10 @@ export default class TaskCard extends Component {
       return <AppLoading />;
     }
     return (
-      <Content style={{ width: "85%", alignSelf: "center" }}>
+      <Content
+        onPress={this.props.onPress}
+        style={{ width: "85%", alignSelf: "center" }}
+      >
         <Card
           style={{
             alignItems: "center"
@@ -45,20 +49,24 @@ export default class TaskCard extends Component {
           >
             <Left>
               <Body>
-                <Text note style={{ color: "blue" }}>
-                  {this.props.name}
-                </Text>
+                <Timestamp
+                  style={{ color: "gray" }}
+                  time={this.props.timestamp}
+                  format="full"
+                  includeDay
+                  component={Text}
+                />
               </Body>
             </Left>
             <Right>
               <Body>
-                <SubMenu option={this.props.option} />
+                <SubMenu id={this.props.item._id} option={this.props.option} />
               </Body>
             </Right>
           </CardItem>
           <CardItem cardBody style={{ width: "90%", height: "18%" }}>
             <Text note numberOfLines={2}>
-              {this.props.desc}
+              {this.props.item.desc}
             </Text>
           </CardItem>
           <CardItem

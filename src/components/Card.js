@@ -7,21 +7,13 @@ export default class Card extends Component {
   }
 
   render() {
-    const {
-      title,
-      subtitle,
-      date,
-      time,
-      status,
-      bordercolor,
-      onPress,
-      background
-    } = this.props;
+    const { title, subtitle, status, bordercolor, onPress } = this.props;
 
     return (
       <TouchableHighlight
         style={[styles.containerStyle, { borderColor: bordercolor }]}
         onPress={onPress}
+        underlayColor={"transparent"}
       >
         <View style={styles.innerContainer}>
           <View style={{ justifyContent: "space-between" }}>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
 import NotifCard from "../components/NotifCard";
+import Header from "../components/Header";
 import bgSrc from "../images/pp.jpg";
 import ppSrc from "../images/pp1.jpg";
 import ppSrc2 from "../images/pp2.jpg";
@@ -27,6 +28,7 @@ export default class DiscoverScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Header title="Discover" navigation={this.props.navigation} />
         <FlatList
           data={sources}
           renderItem={({ item }) => <NotifCard src={item.pp} text={item.txt} />}

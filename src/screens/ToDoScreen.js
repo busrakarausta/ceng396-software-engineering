@@ -1,56 +1,76 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  AsyncStorage,
+  RefreshControl
+} from "react-native";
 import TaskCard from "../components/TaskCard";
-
-const sources = [
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Büşra Karausta deleted Management task of Github Project."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "You added a new task to Xamarin Basics."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Ekrem Güven added a new task to Idea State."
-  },
-  {
-    name: "karaustabusra",
-    deadline: "12/02/2020",
-    desc: "Büşra Karausta deleted Management task of Github Project."
-  }
-];
+import axios from "axios";
+import { ACCESSTOKEN, BASEURL, TASK } from "../const/base_const";
 export default class ToDoScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tasks: [],
+      token: "",
+      status: 1,
+      project_id: props.projectID
+    };
+  }
+
+  componentWillMount() {
+    this._getProjects();
+    console.log(this.state.project_id);
+  }
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem(ACCESSTOKEN);
+
+      this.setState({ token: value });
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+  _getProjects = async () => {
+    try {
+      await this._retrieveData();
+    } catch (error) {}
+    if (this.state.token) {
+      axios
+        .get(BASEURL + TASK + this.state.project_id + "/" + this.state.status, {
+          headers: { Authorization: this.state.token }
+        })
+        .then(response => {
+          this.setState({ tasks: response.data });
+          console.log(this.state.tasks);
+        })
+        .catch(error => {
+          console.error("ToDoAction:", error);
+        });
+    } else console.log("state is empty");
+  };
   render() {
     return (
       <View style={{ flex: 1, marginTop: 10 }}>
         <FlatList
-          data={sources}
+          data={this.state.tasks}
+          refreshControl={
+            <RefreshControl
+              colors={["#9Bd35A", "#689F38"]}
+              refreshing={this.props.refreshing}
+              onRefresh={this._getProjects.bind(this)}
+            />
+          }
           renderItem={({ item }) => (
             <TaskCard
-              name={item.name}
-              desc={item.desc}
+              item={item}
+              onPress={() =>
+                this.props.navigation.navigate("TaskDetail", { task: item })
+              }
               option="In Progress"
-              deadline={item.deadline}
             />
           )}
           showsVerticalScrollIndicator={false}

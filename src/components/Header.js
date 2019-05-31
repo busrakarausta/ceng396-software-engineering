@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, Image, Text, Platform,TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Image, Text, Platform, TouchableOpacity } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import { systemWeights } from "react-native-typography";
 
 import bgSrc from "../images/pp.jpg";
@@ -26,7 +26,7 @@ export default class Header extends Component {
             android: { elevation: 1 }
           }),
           width: "100%",
-          height: "18%",
+          height: "20%",
           justifyContent: "space-between"
         }}
       >
@@ -35,21 +35,26 @@ export default class Header extends Component {
             marginTop: 10,
             padding: 5,
             flexDirection: "row",
-            justifyContent: "flex-end"
+            justifyContent: "space-between"
           }}
         >
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("UserProfile")} >
-          <Image
-            source={bgSrc}
-            style={{
-              width: 40,
-              height: 40,
-              padding: 15,
-              borderWidth: 3,
-              borderColor: "rgba(243,191,144,1)",
-              borderRadius: 20
-            }}
-          />
+          <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
+            <MaterialIcons name="menu" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Profile")}
+          >
+            <Image
+              source={bgSrc}
+              style={{
+                width: 40,
+                height: 40,
+                padding: 15,
+                borderWidth: 3,
+                borderColor: "rgba(243,191,144,1)",
+                borderRadius: 20
+              }}
+            />
           </TouchableOpacity>
         </View>
         <Text
@@ -57,10 +62,10 @@ export default class Header extends Component {
             ...systemWeights.light,
             margin: 10,
             marginTop: 0,
-            fontSize: 40
+            fontSize: 30
           }}
         >
-          Discover
+          {this.props.title}
         </Text>
       </View>
     );
