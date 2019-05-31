@@ -18,11 +18,6 @@ import {
   Content,
   Text
 } from "native-base";
-<<<<<<< HEAD
-import { Font, AppLoading } from "expo";
-import TaskCard from "../components/TaskCard";
-=======
->>>>>>> e671678e12327fd20d8b2d09f79a2f928bd1d8f2
 
 export default class TaskDetail extends React.Component {
   constructor(props) {

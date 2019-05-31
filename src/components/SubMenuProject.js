@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import { View, Text, Image } from "react-native";
-=======
->>>>>>> e671678e12327fd20d8b2d09f79a2f928bd1d8f2
 import {
   Menu,
   MenuOptions,
@@ -10,13 +6,6 @@ import {
   MenuTrigger
 } from "react-native-popup-menu";
 import { Icon } from "native-base";
-<<<<<<< HEAD
-
-export default class SubMenu extends Component {
-  render() {
-    return (
-      <Menu onSelect={value => alert(`Selected number: ${value}`)}>
-=======
 import axios from "axios";
 import { PROJECT, DELETE, BASEURL, TASK } from "../const/base_const";
 
@@ -97,17 +86,10 @@ export default class SubMenuProject extends Component {
   render() {
     return (
       <Menu>
->>>>>>> e671678e12327fd20d8b2d09f79a2f928bd1d8f2
         <MenuTrigger>
           <Icon type="MaterialCommunityIcons" name="dots-horizontal" />
         </MenuTrigger>
         <MenuOptions>
-<<<<<<< HEAD
-          {this.props.option ? (
-            <MenuOption value={1} text={this.props.option} />
-          ) : null}
-          <MenuOption value={2} text="Delete" />
-=======
           {this.state.option ? (
             <MenuOption
               onSelect={() => this.changeProgress()}
@@ -116,7 +98,6 @@ export default class SubMenuProject extends Component {
             />
           ) : null}
           <MenuOption onSelect={() => this.delete()} value={2} text="Delete" />
->>>>>>> e671678e12327fd20d8b2d09f79a2f928bd1d8f2
         </MenuOptions>
       </Menu>
     );
