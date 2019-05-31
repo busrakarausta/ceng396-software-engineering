@@ -1,13 +1,12 @@
 import React from "react";
-import { View, StatusBar, SafeAreaView, ScrollView } from "react-native";
+import { View, StatusBar } from "react-native";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignupScreen from "./src/screens/SignupScreen";
 import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  DrawerItems,
-  createDrawerNavigator
+  TabNavigator
 } from "react-navigation";
 import DiscoverScreen from "./src/screens/DiscoverScreen";
 import DoneScreen from "./src/screens/DoneScreen";
@@ -33,19 +32,7 @@ const TabNavigation = createBottomTabNavigator(
     tabBarComponent: props => <BottomBar {...props} />
   }
 );
-const CustomDrawerComponent = props => (
-  <SafeAreaView
-    style={{
-      flex: 1
-    }}
-  >
-    <ScrollView>
-      <DrawerItems {...props} />
-    </ScrollView>
-  </SafeAreaView>
-);
-
-const HomeNavigator = createDrawerNavigator(
+const HomeNavigator = createStackNavigator(
   {
     Home: TabNavigation,
     Settings: Settings,
@@ -71,7 +58,8 @@ const ProjectNavigator = createStackNavigator(
   },
   {
     navigationOptions: {
-      header: null
+      title: "Discover  ",
+      header: (navigation, props) => <Header {...props} {...navigation} />
     }
   }
 );

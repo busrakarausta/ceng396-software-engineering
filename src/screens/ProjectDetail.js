@@ -44,10 +44,10 @@ export default class ProjectDetail extends Component {
   render() {
     let { width } = Dimensions.get("window");
     width = width * 0.9;
+
     if (this.state.loading) {
       return <AppLoading />;
     }
-
     return (
       <Container>
         <Header
