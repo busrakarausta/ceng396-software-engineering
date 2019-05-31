@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, SafeAreaView, ScrollView } from "react-native";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignupScreen from "./src/screens/SignupScreen";
 import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  TabNavigator
+  DrawerItems,
+  createDrawerNavigator
 } from "react-navigation";
 import DiscoverScreen from "./src/screens/DiscoverScreen";
 import DoneScreen from "./src/screens/DoneScreen";
@@ -19,6 +20,7 @@ import ProjectDetail from "./src/screens/ProjectDetail";
 import { MenuProvider, Menu } from "react-native-popup-menu";
 import TaskDetail from "./src/screens/TaskDetail";
 import UserProfile from "./src/screens/UserProfile";
+import Calendar from "./src/components/Calendar";
 import Settings from "./src/screens/Settings";
 import EditProject from "./src/screens/EditProject";
 
@@ -32,7 +34,19 @@ const TabNavigation = createBottomTabNavigator(
     tabBarComponent: props => <BottomBar {...props} />
   }
 );
-const HomeNavigator = createStackNavigator(
+const CustomDrawerComponent = props => (
+  <SafeAreaView
+    style={{
+      flex: 1
+    }}
+  >
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </SafeAreaView>
+);
+
+const HomeNavigator = createDrawerNavigator(
   {
     Home: TabNavigation,
     Settings: Settings,
@@ -54,12 +68,12 @@ const ProjectNavigator = createStackNavigator(
     CreateTask: CreateTask,
     TaskDetail: TaskDetail,
     EditProject: EditProject,
-    TaskScreen: TaskScreen
+    TaskScreen: TaskScreen,
+    Calendar: Calendar
   },
   {
     navigationOptions: {
-      title: "Discover  ",
-      header: (navigation, props) => <Header {...props} {...navigation} />
+      header: null
     }
   }
 );
